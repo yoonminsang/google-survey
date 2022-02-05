@@ -15,6 +15,9 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     modules: [path.join(__dirname, 'src'), 'node_modules'],
     plugins: [new TsconfigPathsPlugin()],
+    alias: {
+      '@mui/styled-engine': '@mui/styled-engine-sc',
+    },
   },
   module: {
     rules: [

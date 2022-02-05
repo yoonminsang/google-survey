@@ -66,12 +66,16 @@ textarea {
   outline: 0;
   background-color: inherit;
 }
+textarea {
+  resize: none;
+}
 button {
   color: inherit;
   cursor: pointer;
 }
 html{
   overflow-y: scroll;
+  min-height:100vh;
   &::-webkit-scrollbar {
     width: 6px;
     background-color: ${(props) => props.theme.lightGrey};
@@ -87,6 +91,9 @@ html{
     width: 0;
     height: 0;
   }
+}
+body, #root{
+  min-height:100vh;
 }
 div{
   word-break: break-all;
