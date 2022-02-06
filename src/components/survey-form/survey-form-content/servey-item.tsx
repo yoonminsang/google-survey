@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { FilledInput, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import SurveyFormItmeWrapper from '../sruvey-form-item-wrapper';
 import { TSurveyType } from '@/types/survey';
+import SurveyItemMenu from './survey-item-menu';
 
 const Wrapper = styled(SurveyFormItmeWrapper)`
   margin-top: 12px;
@@ -33,12 +34,14 @@ const Item = styled.div`
 `;
 
 interface IProps {
+  id: number;
   type: TSurveyType;
   title: string;
   data: string[];
   isSelected: boolean;
+  isNeccessary: boolean;
 }
-const SurveyItem: React.FC<IProps> = ({ type, title, data, isSelected }) => {
+const SurveyItem: React.FC<IProps> = ({ id, type, title, data, isSelected, isNeccessary }) => {
   // TODO: 리덕스에서 props 넘겨주기
   const [age, setAge] = useState<TSurveyType>('short');
   const handleChange = (event: any) => {
@@ -63,6 +66,7 @@ const SurveyItem: React.FC<IProps> = ({ type, title, data, isSelected }) => {
         </Flex>
         {data}
       </Item>
+      {isSelected && <SurveyItemMenu id={id} isNeccessary={isNeccessary} />}
     </Wrapper>
   );
 };
