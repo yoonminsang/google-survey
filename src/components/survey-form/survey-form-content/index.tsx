@@ -14,22 +14,22 @@ const SurveyFormContent: React.FC = () => {
       { id: 4, type: 'checkbox', title: '체크박스 질문', data: ['체크1', '체크2'], isNeccessary: false },
       { id: 5, type: 'dropdown', title: '드롭다운 질문', data: ['드롭다운1', '드롭다운2'], isNeccessary: false },
     ],
-    selected: 0,
+    selected: 1,
   };
 
   const { surveys, selected } = mockState;
   return (
     <Wrapper>
-      {surveys.map((survey, index) => {
+      {surveys.map((survey) => {
         const { id, type, title, data, isNeccessary } = survey;
         return (
           <SurveyItem
-            key={index}
+            key={id}
             id={id}
             type={type}
             title={title}
             data={data}
-            isSelected={selected === index}
+            isSelected={selected === id}
             isNeccessary={isNeccessary}
           />
         );
