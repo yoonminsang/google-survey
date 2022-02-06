@@ -1,27 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
 import SurveyItem from './survey-item';
-import { ISurveys } from '@/types/survey';
+import { useSurveyContent } from '@/hooks/useSurveyContent';
 
 const Wrapper = styled.div``;
 
 const SurveyFormContent: React.FC = () => {
-  const mockState: ISurveys = {
-    surveys: [
-      { id: 1, type: 'short', title: '짧은제목', data: ['단답형 텍스트'], isNeccessary: false },
-      { id: 2, type: 'long', title: '긴제목', data: ['장문형 텍스트'], isNeccessary: false },
-      { id: 3, type: 'multiple', title: '멀티플 질문', data: ['치킨', '피자'], isNeccessary: false },
-      { id: 4, type: 'checkbox', title: '체크박스 질문', data: ['체크1', '체크2'], isNeccessary: false },
-      { id: 5, type: 'dropdown', title: '드롭다운 질문', data: ['드롭다운1', '드롭다운2'], isNeccessary: false },
-    ],
-    selected: 1,
-  };
-
-  const { surveys, selected } = mockState;
+  const {
+    surveys,
+    selected,
+    onChangeSurveyTitle,
+    onChangeSurveyItem,
+    onChangeSurveyType,
+    onAddSurvey,
+    onAddSurveyItem,
+    onSelectSurvey,
+  } = useSurveyContent();
   return (
     <Wrapper>
       {surveys.map((survey) => {
-        const { id, type, title, data, isNeccessary } = survey;
+        const { id, type, title, data } = survey;
         return (
           <SurveyItem
             key={id}
@@ -30,7 +28,12 @@ const SurveyFormContent: React.FC = () => {
             title={title}
             data={data}
             isSelected={selected === id}
-            isNeccessary={isNeccessary}
+            onChangeSurveyTitle={onChangeSurveyTitle}
+            onChangeSurveyItem={onChangeSurveyItem}
+            onChangeSurveyType={onChangeSurveyType}
+            onAddSurvey={onAddSurvey}
+            onAddSurveyItem={onAddSurveyItem}
+            onSelectSurvey={onSelectSurvey}
           />
         );
       })}
