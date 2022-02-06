@@ -19,10 +19,11 @@ interface IProps {
 }
 
 const SurveyItemSimpleList: React.FC<IProps> = ({ type, data, isSelected }) => {
+  const text = type === 'short' ? '단답형 텍스트' : '장문형 텍스트';
   return (
     <SurveyItemListWrapper isSelected={isSelected}>
       <ListWrapper isSelected={isSelected} short={type === 'short'}>
-        {data}
+        {text}
       </ListWrapper>
     </SurveyItemListWrapper>
   );
