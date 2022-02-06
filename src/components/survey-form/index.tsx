@@ -1,4 +1,3 @@
-import useInputs from '@/hooks/use-inputs';
 import React from 'react';
 import styled from 'styled-components';
 import SurveyFormContent from './survey-form-content';
@@ -17,11 +16,10 @@ const Form = styled.form`
 `;
 
 const SurveyForm: React.FC = () => {
-  const [{ title, description }, onChange] = useInputs({ title: '제목 없는 설문지', description: '' });
   return (
     <Wrapper>
       <Form>
-        <SurveyFormHeader title={title} description={description} onChange={onChange} />
+        <SurveyFormHeader />
         <SurveyFormContent />
       </Form>
     </Wrapper>

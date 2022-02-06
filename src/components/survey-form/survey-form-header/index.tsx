@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input } from '@mui/material';
 import SurveyFormItmeWrapper from '../styled/sruvey-form-item-wrapper';
+import { useSurveyHeader } from '@/hooks/useSurveyHeader';
 
 const Wrapper = styled(SurveyFormItmeWrapper)`
   > div {
@@ -23,18 +24,13 @@ const Description = styled(Input)`
   margin-top: 10px;
 `;
 
-interface IProps {
-  title: string;
-  description: string;
-  onChange: () => void;
-}
-
-const SurveyFormHeader: React.FC<IProps> = ({ title, description, onChange }) => {
+const SurveyFormHeader: React.FC = () => {
+  const { header, onChange } = useSurveyHeader();
   return (
     <Wrapper>
-      <Title value={title} name="title" onChange={onChange} placeholder="설문지 제목" />
+      <Title value={header.title} name="title" onChange={onChange} placeholder="설문지 제목" />
       <Description
-        value={description}
+        value={header.description}
         name="description"
         onChange={onChange}
         placeholder="설문지 설명"
