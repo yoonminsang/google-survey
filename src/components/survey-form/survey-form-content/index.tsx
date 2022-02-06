@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SurveyItem from './servey-item';
+import SurveyItem from './survey-item';
 import { ISurveys } from '@/types/survey';
 
 const Wrapper = styled.div``;
