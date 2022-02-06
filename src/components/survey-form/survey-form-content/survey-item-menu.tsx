@@ -40,10 +40,10 @@ const SurveyItemMenu: React.FC<IProps> = ({ id, isNeccessary }) => {
   return (
     <Wrapper>
       <Flex>
-        <IconButton>
+        <IconButton type="button">
           <ContentCopyIcon sx={{ fontSize: 25 }} />
         </IconButton>
-        <IconButton>
+        <IconButton type="button">
           <DeleteOutlineIcon sx={{ fontSize: 25 }} />
         </IconButton>
         <Block />
