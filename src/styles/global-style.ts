@@ -72,6 +72,8 @@ textarea {
 button {
   color: inherit;
   cursor: pointer;
+  border:0;
+  background:transparent;
 }
 html{
   overflow-y: scroll;
