@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Input } from '@mui/material';
-import SurveyFormItmeWrapper from '../sruvey-form-item-wrapper';
+import SurveyFormItmeWrapper from '../common/sruvey-form-item-wrapper';
 
 const Wrapper = styled(SurveyFormItmeWrapper)`
   > div {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FilledInput, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
-import SurveyFormItmeWrapper from '../sruvey-form-item-wrapper';
+import SurveyFormItmeWrapper from '../common/sruvey-form-item-wrapper';
 import { TSurveyType } from '@/types/survey';
 import SurveyItemMenu from './survey-item-menu';
 import SurveyItemSelect from './survey-item-select';
@@ -22,15 +22,6 @@ const Flex = styled.div`
 const Title = styled(FilledInput)`
   width: 446px;
   background-color: transparent;
-`;
-
-const SelectWrapper = styled(FormControl)`
-  width: 210px;
-  &.blind {
-    opacity: 0;
-    user-select: none;
-    pointer-events: none;
-  }
 `;
 
 const Item = styled.div`
