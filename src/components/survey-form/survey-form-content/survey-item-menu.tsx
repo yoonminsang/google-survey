@@ -33,9 +33,9 @@ const Block = styled.div`
 
 interface IProps {
   id: number;
-  isNeccessary: boolean;
 }
-const SurveyItemMenu: React.FC<IProps> = ({ id, isNeccessary }) => {
+const SurveyItemMenu: React.FC<IProps> = ({ id }) => {
+  // 커스텀훅으로 3개이벤트랑 state값 id로 가져오기
   const [check, setCheck] = useState(false);
   return (
     <Wrapper>
