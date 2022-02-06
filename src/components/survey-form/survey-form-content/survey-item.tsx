@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FilledInput } from '@mui/material';
-import SurveyFormItmeWrapper from '../common/sruvey-form-item-wrapper';
+import SurveyFormItmeWrapper from '../styled/sruvey-form-item-wrapper';
 import { TSurveyType } from '@/types/survey';
 import SurveyItemMenu from './survey-item-menu';
 import SurveyItemSelect from './survey-item-select';
-import SurveyItemSimpleList from './survey-item-simple-list';
-import SurveyItemComplexList from './survey-item-complex-list';
-import SurveyItemDropdownList from './survey-item-dropdown-list';
+import SurveyItemSimpleList from './survey-item-list/survey-item-simple-list';
+import SurveyItemComplexList from './survey-item-list/survey-item-complex-list';
+import SurveyItemDropdownList from './survey-item-list/survey-item-dropdown-list';
 
 const Wrapper = styled(SurveyFormItmeWrapper)`
   margin-top: 12px;

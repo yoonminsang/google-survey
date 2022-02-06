@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import SurveyItemListWrapper from '../common/survey-item-list-wrapper';
+import SurveyItemListWrapper from '../../styled/survey-item-list-wrapper';
 
 const ListWrapper = styled.div<{ isSelected: boolean; short: boolean }>`
   border-bottom: 1px solid rgba(0, 0, 0, 0.38);
