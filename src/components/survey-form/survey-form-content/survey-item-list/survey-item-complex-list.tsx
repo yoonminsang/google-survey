@@ -42,23 +42,37 @@ interface IProps {
   type: 'multiple' | 'checkbox';
   data: string[];
   isSelected: boolean;
+  onChangeSurveyItem: (e: React.ChangeEvent, id: number, dataIndex: number) => void;
+  id: number;
+  onAddSurveyItem: (id: number) => void;
 }
 
-const SurveyItemComplexList: React.FC<IProps> = ({ type, data, isSelected }) => {
+const SurveyItemComplexList: React.FC<IProps> = ({
+  type,
+  data,
+  isSelected,
+  onChangeSurveyItem,
+  id,
+  onAddSurveyItem,
+}) => {
   const Icon = type === 'multiple' ? RadioIcon : CheckBoxIcon;
   return (
     <SurveyItemListWrapper isSelected={isSelected}>
-      {data.map((str) => (
-        <ListWrapper key={str}>
+      {data.map((str, dataIndex) => (
+        <ListWrapper key={dataIndex}>
           <DrapWrapper></DrapWrapper>
           {Icon}
-          <CustomInput value={str} />
+          <CustomInput value={str} onChange={(e: React.ChangeEvent) => onChangeSurveyItem(e, id, dataIndex)} />
         </ListWrapper>
       ))}
       <ListWrapper>
         <DrapWrapper></DrapWrapper>
         {Icon}
-        <div style={{ height: '32px', width: '612px', display: 'flex', alignItems: 'center' }}>
+        {/* TODO: 기타추가, 스타일, 클릭이벤트 옵션추가에만 */}
+        <div
+          style={{ height: '32px', width: '612px', display: 'flex', alignItems: 'center' }}
+          onClick={() => onAddSurveyItem(id)}
+        >
           옵션 추가 또는 기타추가
         </div>
       </ListWrapper>

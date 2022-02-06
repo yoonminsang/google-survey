@@ -28,24 +28,31 @@ const CustomInput = styled(Input)`
 interface IProps {
   data: string[];
   isSelected: boolean;
+  onChangeSurveyItem: (e: React.ChangeEvent, id: number, dataIndex: number) => void;
+  id: number;
+  onAddSurveyItem: (id: number) => void;
 }
 
-const SurveyItemDropdownList: React.FC<IProps> = ({ data, isSelected }) => {
+const SurveyItemDropdownList: React.FC<IProps> = ({ data, isSelected, onChangeSurveyItem, id, onAddSurveyItem }) => {
   return (
     <SurveyItemListWrapper isSelected={isSelected}>
-      {data.map((str, index) => (
+      {data.map((str, dataIndex) => (
         <ListWrapper key={str}>
           <DrapWrapper></DrapWrapper>
-          {/* {Icon} */}
-          <DropdownWrapper>{index + 1}</DropdownWrapper>
-          <CustomInput value={str} />
+          <DropdownWrapper>{dataIndex + 1}</DropdownWrapper>
+          <CustomInput value={str} onChange={(e: React.ChangeEvent) => onChangeSurveyItem(e, id, dataIndex)} />
         </ListWrapper>
       ))}
       <ListWrapper>
         <DrapWrapper></DrapWrapper>
-        {/* {Icon} */}
         <DropdownWrapper>{data.length + 1}</DropdownWrapper>
-        <div style={{ height: '32px', width: '612px', display: 'flex', alignItems: 'center' }}>옵션 추가</div>
+        {/* TODO: 스타일, 클릭이벤트 옵션추가에만 */}
+        <div
+          style={{ height: '32px', width: '612px', display: 'flex', alignItems: 'center' }}
+          onClick={() => onAddSurveyItem(id)}
+        >
+          옵션 추가
+        </div>
       </ListWrapper>
     </SurveyItemListWrapper>
   );
