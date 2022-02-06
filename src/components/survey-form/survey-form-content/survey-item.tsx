@@ -2,16 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { FilledInput } from '@mui/material';
 import SurveyFormItmeWrapper from '../styled/sruvey-form-item-wrapper';
-import { TSurveyType } from '@/types/survey';
+import { TSurvey, TSurveyType } from '@/types/survey';
 import SurveyItemMenu from './survey-item-menu';
 import SurveyItemSelect from './survey-item-select';
 import SurveyItemSimpleList from './survey-item-list/survey-item-simple-list';
 import SurveyItemComplexList from './survey-item-list/survey-item-complex-list';
 import SurveyItemDropdownList from './survey-item-list/survey-item-dropdown-list';
-
-const Wrapper = styled(SurveyFormItmeWrapper)`
-  margin-top: 12px;
-`;
 
 const DrapWrapper = styled.div`
   height: 24px;
@@ -36,33 +32,79 @@ interface IProps {
   title: string;
   data: string[];
   isSelected: boolean;
-  isNeccessary: boolean;
+  onChangeSurveyTitle: (e: React.ChangeEvent, id: number) => void;
+  onChangeSurveyItem: (e: React.ChangeEvent, id: number, dataIndex: number) => void;
+  onChangeSurveyType: (id: number, type: TSurveyType) => void;
+  onAddSurvey: () => void;
+  onAddSurveyItem: (id: number) => void;
+  onSelectSurvey: (id: number) => void;
 }
 
-const getList = (type: TSurveyType, data: string[], isSelected: boolean) => {
+const getList = (
+  type: TSurveyType,
+  data: string[],
+  isSelected: boolean,
+  onChangeSurveyItem: (e: React.ChangeEvent, id: number, dataIndex: number) => void,
+  id: number,
+  onAddSurveyItem: (id: number) => void,
+) => {
   switch (type) {
     case 'short':
     case 'long':
       return <SurveyItemSimpleList type={type} data={data} isSelected={isSelected} />;
     case 'multiple':
     case 'checkbox':
-      return <SurveyItemComplexList type={type} data={data} isSelected={isSelected} />;
+      return (
+        <SurveyItemComplexList
+          type={type}
+          data={data}
+          isSelected={isSelected}
+          onChangeSurveyItem={onChangeSurveyItem}
+          id={id}
+          onAddSurveyItem={onAddSurveyItem}
+        />
+      );
     case 'dropdown':
-      return <SurveyItemDropdownList data={data} isSelected={isSelected} />;
+      return (
+        <SurveyItemDropdownList
+          data={data}
+          isSelected={isSelected}
+          onChangeSurveyItem={onChangeSurveyItem}
+          id={id}
+          onAddSurveyItem={onAddSurveyItem}
+        />
+      );
   }
 };
 
-const SurveyItem: React.FC<IProps> = ({ id, type, title, data, isSelected, isNeccessary }) => {
+const SurveyItem: React.FC<IProps> = ({
+  id,
+  type,
+  title,
+  data,
+  isSelected,
+  onChangeSurveyTitle,
+  onChangeSurveyItem,
+  onChangeSurveyType,
+  onAddSurvey,
+  onAddSurveyItem,
+  onSelectSurvey,
+}) => {
   return (
-    <Wrapper>
+    <SurveyFormItmeWrapper isMargin isSelected={isSelected} onClick={() => onSelectSurvey(id)}>
       <DrapWrapper></DrapWrapper>
       <Flex>
-        <Title inputComponent="textarea" value={title} readOnly={!isSelected} />
-        <SurveyItemSelect isSelected={isSelected} />
+        <Title
+          inputComponent="textarea"
+          value={title}
+          readOnly={!isSelected}
+          onChange={(e) => onChangeSurveyTitle(e, id)}
+        />
+        <SurveyItemSelect id={id} isSelected={isSelected} type={type} onChangeSurveyType={onChangeSurveyType} />
       </Flex>
-      {getList(type, data, isSelected)}
-      {isSelected && <SurveyItemMenu id={id} isNeccessary={isNeccessary} />}
-    </Wrapper>
+      {getList(type, data, isSelected, onChangeSurveyItem, id, onAddSurveyItem)}
+      {isSelected && <SurveyItemMenu id={id} />}
+    </SurveyFormItmeWrapper>
   );
 };
 
