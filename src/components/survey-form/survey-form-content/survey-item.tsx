@@ -92,7 +92,12 @@ const SurveyItem: React.FC<IProps> = ({
     <SurveyFormItmeWrapper isMargin isSelected={isSelected} onClick={() => onSelectSurvey(id)}>
       <DrapWrapper></DrapWrapper>
       <Flex>
-        <Title inputComponent="textarea" value={title} onChange={(e) => onChangeSurveyTitle(e, id)} />
+        <Title
+          inputComponent="textarea"
+          value={title}
+          placeholder="질문"
+          onChange={(e) => onChangeSurveyTitle(e, id)}
+        />
         <SurveyItemSelect id={id} isSelected={isSelected} type={type} onChangeSurveyType={onChangeSurveyType} />
       </Flex>
       {getList(type, data, isSelected, onChangeSurveyItem, id, onAddSurveyItem, onRemoveSurveyItem)}
