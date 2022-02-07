@@ -18,7 +18,7 @@ interface IProps {
   isSelected: boolean;
 }
 
-const SurveyItemSimpleList: React.FC<IProps> = ({ type, data, isSelected }) => {
+const SurveyItemSimpleList: React.FC<IProps> = ({ type, isSelected }) => {
   const text = type === 'short' ? '단답형 텍스트' : '장문형 텍스트';
   return (
     <SurveyItemListWrapper isSelected={isSelected}>
