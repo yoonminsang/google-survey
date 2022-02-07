@@ -64,7 +64,6 @@ const slice = createSlice({
     },
     chagneSurveyType: (state, action: PayloadAction<{ idIndex: number; type: TSurveyType }>) => {
       const { idIndex, type } = action.payload;
-      state.surveys[idIndex].data = ['옵션 1'];
       state.surveys[idIndex].type = type;
     },
     selectSurvey: (state, action: PayloadAction<number>) => {
