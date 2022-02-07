@@ -54,11 +54,12 @@ const getList = (
   switch (type) {
     case 'short':
     case 'long':
-      return <SurveyItemSimpleList type={type} data={data} isSelected={isSelected} />;
+      return <SurveyItemSimpleList key={id} type={type} data={data} isSelected={isSelected} />;
     case 'multiple':
     case 'checkbox':
       return (
         <SurveyItemComplexList
+          key={id}
           type={type}
           data={data}
           isSelected={isSelected}
@@ -74,6 +75,7 @@ const getList = (
     case 'dropdown':
       return (
         <SurveyItemDropdownList
+          key={id}
           data={data}
           isSelected={isSelected}
           onChangeSurveyItem={onChangeSurveyItem}
