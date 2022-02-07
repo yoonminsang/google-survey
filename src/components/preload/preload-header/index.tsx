@@ -28,6 +28,7 @@ const Description = styled.div`
 const Border = styled.div`
   border-top: 1px solid #dadce0;
   margin: 0 -1px;
+  margin-top: 10px;
 `;
 
 const Neccessary = styled.div`
