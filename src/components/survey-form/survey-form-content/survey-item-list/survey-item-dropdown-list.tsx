@@ -79,7 +79,6 @@ const SurveyItemDropdownList: React.FC<IProps> = ({
       <ListWrapper>
         <DrapWrapper></DrapWrapper>
         <DropdownWrapper>{data.length + 1}</DropdownWrapper>
-        {/* TODO: 스타일, 클릭이벤트 옵션추가에만 */}
         <AddWrapper>
           <AddOption type="button" onClick={() => onAddSurveyItem(id)}>
             옵션 추가
