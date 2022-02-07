@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -6,6 +6,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import SurveyForm from '@/components/survey-form';
 import styled from 'styled-components';
 import Preload from '@/components/preload';
+import { usePreload } from '@/hooks/use-preload';
 
 const QUESTION = 'question';
 const PRELOAD = 'preload';
@@ -32,18 +33,17 @@ const TabPanelWrapper = styled.div`
 `;
 
 const MainPage: React.FC = () => {
-  const [value, setValue] = React.useState(QUESTION);
-  const handleChange = useCallback((e: React.SyntheticEvent, newValue: string) => {
-    setValue(newValue);
+  const { onInit } = usePreload();
+  const [hash, setHash] = useState(QUESTION);
+  const handleChange = useCallback((e: React.SyntheticEvent, newHash: string) => {
+    if (newHash === PRELOAD) onInit();
+    location.hash = hash;
+    setHash(newHash);
   }, []);
-
-  useEffect(() => {
-    location.hash = value;
-  }, [value]);
 
   return (
     <Wrapper>
-      <TabContext value={value}>
+      <TabContext value={hash}>
         <TabListWrapper>
           <TabList onChange={handleChange} aria-label="survey">
             <Tab label="질문" value={QUESTION} />
@@ -53,13 +53,13 @@ const MainPage: React.FC = () => {
         </TabListWrapper>
         <TabPanelWrapper>
           <TabPanel value={QUESTION} sx={{ padding: '0px' }}>
-            <SurveyForm />
+            {hash === QUESTION && <SurveyForm />}
           </TabPanel>
           <TabPanel value={PRELOAD} sx={{ padding: '0px' }}>
-            <Preload />
+            {hash === PRELOAD && <Preload />}
           </TabPanel>
           <TabPanel value={ANSWER} sx={{ padding: '0px' }}>
-            응답 페이지
+            {hash === ANSWER && <div>응답 페이지</div>}
           </TabPanel>
         </TabPanelWrapper>
       </TabContext>
