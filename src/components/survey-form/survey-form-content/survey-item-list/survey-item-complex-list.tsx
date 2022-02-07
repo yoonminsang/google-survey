@@ -111,7 +111,7 @@ const SurveyItemComplexList: React.FC<IProps> = ({
         <ListWrapper>
           <DrapWrapper></DrapWrapper>
           {Icon}
-          <CustomInput value="기타..." style={{ color: '#70757a' }} readOnly />
+          <CustomInput value="기타..." sx={{ color: '#70757a' }} readOnly />
           <RemoveButton type="button" onClick={() => onRemoveSurveyEtc(id)}>
             <ClearIcon />
           </RemoveButton>
