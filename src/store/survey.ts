@@ -1,17 +1,6 @@
 import { ISurvey, ISurveyHeader, TSurvey, TSurveyType } from '@/types/survey';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// interface IChangeHeader {
-//   key: 'title' | 'description';
-//   value: string;
-// }
-
-// interface IChangeSurveyItem {
-//   id: number;
-//   dataIndex: number;
-//   data: string;
-// }
-
 interface IState extends ISurvey {
   header: ISurveyHeader;
 }
