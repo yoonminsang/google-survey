@@ -23,7 +23,7 @@ const SurveyFormSidebar: React.FC = () => {
   const { scrollY } = useScroll();
   const { onAddSurvey } = useSurveySidebar();
   return (
-    <Wrapper style={{ top: `${scrollY + 152}px` }}>
+    <Wrapper style={{ top: `${scrollY + 160}px` }}>
       <Button type="button" onClick={onAddSurvey}>
         <AddCircleOutlineIcon />
       </Button>
