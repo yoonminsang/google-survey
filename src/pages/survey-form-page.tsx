@@ -6,6 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import SurveyForm from '@/components/survey-form';
 import styled from 'styled-components';
+import Preload from '@/components/preload';
 
 const QUESTION = 'question';
 const PRELOAD = 'preload';
@@ -19,6 +20,7 @@ const Wrapper = styled.div`
   padding: 50px 0;
 `;
 
+// TODO: 정리
 const SurveyFormPage: React.FC = () => {
   const [value, setValue] = React.useState(QUESTION);
   const handleChange = useCallback((e: React.SyntheticEvent, newValue: string) => {
@@ -45,8 +47,12 @@ const SurveyFormPage: React.FC = () => {
           <TabPanel value={QUESTION} sx={{ padding: '0px' }}>
             <SurveyForm />
           </TabPanel>
-          <TabPanel value={PRELOAD}>미리보기 페이지</TabPanel>
-          <TabPanel value={ANSWER}>응답 페이지</TabPanel>
+          <TabPanel value={PRELOAD} sx={{ padding: '0px' }}>
+            <Preload />
+          </TabPanel>
+          <TabPanel value={ANSWER} sx={{ padding: '0px' }}>
+            응답 페이지
+          </TabPanel>
         </Wrapper>
       </TabContext>
     </Box>
