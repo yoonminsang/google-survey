@@ -6,7 +6,6 @@ import { addSurvey } from '@/store/survey';
 export const useSurveySidebar = () => {
   const dispatch = useDispatch();
   const surveys = useSelector((state: RootState) => state.survey.surveys);
-  // TODO: usecallback??
   const onAddSurvey = () => {
     const maxId = Math.max(...surveys.map((survey) => survey.id));
     const nextSurvey = {
