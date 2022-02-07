@@ -69,12 +69,11 @@ const slice = createSlice({
     selectSurvey: (state, action: PayloadAction<number>) => {
       state.selected = action.payload;
     },
-    // TODO: necessary 적용
     chagneSurveyNeccessary: (state, action: PayloadAction<number>) => {
       const idIndex = action.payload;
       state.surveys[idIndex].isNeccessary = !state.surveys[idIndex].isNeccessary;
     },
-    // TODO: delete, copy
+    // TODO: DELETE, COPY
     preloadSurvey: (state, action) => state,
   },
 });
