@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
 ::after {
   box-sizing: border-box;
   background-repeat: no-repeat;
+  font-size:14px;
 }
 /* HTML5 display-role reset for older browsers */
 article,
