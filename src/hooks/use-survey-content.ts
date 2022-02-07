@@ -7,7 +7,6 @@ import {
   chagneSurveyType,
   changeSurveyItem,
   changeSurveyTitle,
-  removeSurvey,
   removeSurveyEtc,
   removeSurveyItem,
   selectSurvey,
