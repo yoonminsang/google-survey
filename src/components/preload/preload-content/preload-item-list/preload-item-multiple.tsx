@@ -31,7 +31,9 @@ const PreloadItemMultiple: React.FC<IProps> = ({ id, data, etc }) => {
         {etc && (
           <EtcWrapper>
             <FormControlLabel value="etc" control={<Radio />} label="기타" />
-            {<Input sx={{ width: '498px', margin: '0px !important' }} />}
+            <FormControl>
+              <Input sx={{ width: '498px', margin: '0px !important' }} />
+            </FormControl>
           </EtcWrapper>
         )}
       </RadioGroup>
