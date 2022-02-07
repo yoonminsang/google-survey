@@ -5,6 +5,7 @@ import SurveyFormItmeWrapper from '../styled/sruvey-form-item-wrapper';
 import { useSurveyHeader } from '@/hooks/use-survey-header';
 
 const Wrapper = styled(SurveyFormItmeWrapper)`
+  border-top: 10px solid rgb(103, 58, 183);
   > div {
     margin: 0 24px;
     margin-top: 20px;
