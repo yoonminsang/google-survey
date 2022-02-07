@@ -5,18 +5,61 @@ interface IState extends ISurvey {
   header: ISurveyHeader;
 }
 
+// TODO: 헤더값 ''으로 변경
 const initialState: IState = {
-  header: { title: '', description: '' },
+  header: { title: '제목없는 설문지', description: '설명' },
   surveys: [
     {
       id: 1,
+      type: 'short',
+      title: '쇼트',
+      data: ['옵션 1'],
+      isNeccessary: true,
+      etc: false,
+    },
+    {
+      id: 2,
+      type: 'long',
+      title: '롱',
+      data: ['옵션 1'],
+      isNeccessary: false,
+      etc: false,
+    },
+    {
+      id: 3,
       type: 'multiple',
-      title: '',
+      title: '객관식',
+      data: ['옵션 1'],
+      isNeccessary: false,
+      etc: true,
+    },
+    {
+      id: 4,
+      type: 'checkbox',
+      title: '체크',
+      data: ['옵션 1', '옵션 2'],
+      isNeccessary: false,
+      etc: true,
+    },
+    {
+      id: 5,
+      type: 'dropdown',
+      title: '드롭',
       data: ['옵션 1'],
       isNeccessary: false,
       etc: false,
     },
   ],
+  // surveys: [
+  //   {
+  //     id: 1,
+  //     type: 'multiple',
+  //     title: '',
+  //     data: ['옵션 1'],
+  //     isNeccessary: false,
+  //     etc: false,
+  //   },
+  // ],
   selected: null,
 };
 
@@ -52,13 +95,9 @@ const slice = createSlice({
       const { idIndex, dataIndex } = action.payload;
       state.surveys[idIndex].data.splice(dataIndex, 1);
     },
-    addSurveyEtc: (state, action: PayloadAction<number>) => {
-      const idIndex = action.payload;
-      state.surveys[idIndex].etc = true;
-    },
-    removeSurveyEtc: (state, action: PayloadAction<number>) => {
-      const idIndex = action.payload;
-      state.surveys[idIndex].etc = false;
+    toggleSurveyEtc: (state, action: PayloadAction<{ idIndex: number; nextEtc: boolean }>) => {
+      const { idIndex, nextEtc } = action.payload;
+      state.surveys[idIndex].etc = nextEtc;
     },
     chagneSurveyType: (state, action: PayloadAction<{ idIndex: number; type: TSurveyType }>) => {
       const { idIndex, type } = action.payload;
@@ -86,7 +125,6 @@ const slice = createSlice({
       state.surveys.splice(idIndex + 1, 0, nextSurvey);
       state.selected = nextId;
     },
-    preloadSurvey: (state, action) => state,
   },
 });
 
@@ -99,13 +137,11 @@ const {
   changeSurveyItem,
   chagneSurveyNeccessary,
   selectSurvey,
-  preloadSurvey,
   chagneSurveyType,
   removeSurveyItem,
   removeSurvey,
   copySurvey,
-  addSurveyEtc,
-  removeSurveyEtc,
+  toggleSurveyEtc,
 } = actions;
 
 export {
@@ -117,11 +153,9 @@ export {
   changeSurveyItem,
   chagneSurveyNeccessary,
   selectSurvey,
-  preloadSurvey,
   chagneSurveyType,
   removeSurveyItem,
   removeSurvey,
   copySurvey,
-  addSurveyEtc,
-  removeSurveyEtc,
+  toggleSurveyEtc,
 };

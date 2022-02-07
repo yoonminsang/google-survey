@@ -2,14 +2,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import {
-  addSurveyEtc,
   addSurveyItem,
   chagneSurveyType,
   changeSurveyItem,
   changeSurveyTitle,
-  removeSurveyEtc,
   removeSurveyItem,
   selectSurvey,
+  toggleSurveyEtc,
 } from '@/store/survey';
 import { TSurveyType } from '@/types/survey';
 import { findSurveyId } from '@/utils';
@@ -45,11 +44,11 @@ export const useSurveyContent = () => {
   };
   const onAddSurveyEtc = (id: number) => {
     const idIndex = findSurveyId(surveys, id);
-    dispatch({ type: addSurveyEtc.type, payload: idIndex });
+    dispatch({ type: toggleSurveyEtc.type, payload: { idIndex, nextEtc: true } });
   };
   const onRemoveSurveyEtc = (id: number) => {
     const idIndex = findSurveyId(surveys, id);
-    dispatch({ type: removeSurveyEtc.type, payload: idIndex });
+    dispatch({ type: toggleSurveyEtc.type, payload: { idIndex, nextEtc: false } });
   };
   const onSelectSurvey = (id: number) => {
     if (id === selected) return;
