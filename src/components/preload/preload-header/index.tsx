@@ -25,12 +25,23 @@ const Description = styled.div`
   margin-top: 10px;
 `;
 
+const Border = styled.div`
+  border-top: 1px solid #dadce0;
+  margin: 0 -1px;
+`;
+
+const Neccessary = styled.div`
+  color: #d93025;
+`;
+
 const PreloadHeader = () => {
   const { title, description } = useSelector((state: RootState) => state.survey.header);
   return (
     <Wrapper>
       <Title>{title}</Title>
       <Description>{description}</Description>
+      <Border />
+      <Neccessary>* 필수항목</Neccessary>
     </Wrapper>
   );
 };
