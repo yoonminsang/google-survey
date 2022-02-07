@@ -27,6 +27,31 @@ const CustomInput = styled(Input)`
   width: 612px;
 `;
 
+const AddWrapper = styled.div`
+  height: 32px;
+  width: 612px;
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 6px;
+  }
+`;
+
+const AddOption = styled.button`
+  color: #70757a;
+  &:hover {
+    border-bottom: 1px solid #70757a;
+  }
+`;
+
+const AddEtc = styled.button`
+  color: #1a73e8;
+  padding: 8px;
+  &:hover {
+    background-color: #f7faff;
+  }
+`;
+
 const RadioIcon = (
   <IconWrapper>
     <RadioButtonUncheckedRoundedIcon />
@@ -69,12 +94,13 @@ const SurveyItemComplexList: React.FC<IProps> = ({
         <DrapWrapper></DrapWrapper>
         {Icon}
         {/* TODO: 기타추가, 스타일, 클릭이벤트 옵션추가에만 */}
-        <div
-          style={{ height: '32px', width: '612px', display: 'flex', alignItems: 'center' }}
-          onClick={() => onAddSurveyItem(id)}
-        >
-          옵션 추가 또는 기타추가
-        </div>
+        <AddWrapper>
+          <AddOption type="button" onClick={() => onAddSurveyItem(id)}>
+            옵션 추가
+          </AddOption>
+          <span>또는</span>
+          <AddEtc type="button">'기타'추가</AddEtc>
+        </AddWrapper>
       </ListWrapper>
     </SurveyItemListWrapper>
   );

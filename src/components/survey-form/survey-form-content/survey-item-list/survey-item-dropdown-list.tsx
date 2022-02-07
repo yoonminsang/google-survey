@@ -25,6 +25,23 @@ const CustomInput = styled(Input)`
   width: 612px;
 `;
 
+const AddWrapper = styled.div`
+  height: 32px;
+  width: 612px;
+  display: flex;
+  align-items: center;
+  span {
+    margin-left: 6px;
+  }
+`;
+
+const AddOption = styled.button`
+  color: #70757a;
+  &:hover {
+    border-bottom: 1px solid #70757a;
+  }
+`;
+
 interface IProps {
   data: string[];
   isSelected: boolean;
@@ -37,7 +54,7 @@ const SurveyItemDropdownList: React.FC<IProps> = ({ data, isSelected, onChangeSu
   return (
     <SurveyItemListWrapper isSelected={isSelected}>
       {data.map((str, dataIndex) => (
-        <ListWrapper key={str}>
+        <ListWrapper key={dataIndex}>
           <DrapWrapper></DrapWrapper>
           <DropdownWrapper>{dataIndex + 1}</DropdownWrapper>
           <CustomInput value={str} onChange={(e: React.ChangeEvent) => onChangeSurveyItem(e, id, dataIndex)} />
@@ -47,12 +64,11 @@ const SurveyItemDropdownList: React.FC<IProps> = ({ data, isSelected, onChangeSu
         <DrapWrapper></DrapWrapper>
         <DropdownWrapper>{data.length + 1}</DropdownWrapper>
         {/* TODO: 스타일, 클릭이벤트 옵션추가에만 */}
-        <div
-          style={{ height: '32px', width: '612px', display: 'flex', alignItems: 'center' }}
-          onClick={() => onAddSurveyItem(id)}
-        >
-          옵션 추가
-        </div>
+        <AddWrapper>
+          <AddOption type="button" onClick={() => onAddSurveyItem(id)}>
+            옵션 추가
+          </AddOption>
+        </AddWrapper>
       </ListWrapper>
     </SurveyItemListWrapper>
   );
