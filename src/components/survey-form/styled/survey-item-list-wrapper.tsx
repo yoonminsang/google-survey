@@ -7,7 +7,6 @@ const SurveyItemListWrapper = styled.div<{ isSelected: boolean }>`
   flex-direction: column;
   margin-top: 10px;
   padding-bottom: 5px;
-  font-size: 14px;
 `;
 
 export default SurveyItemListWrapper;

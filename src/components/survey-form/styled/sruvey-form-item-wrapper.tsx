@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const SurveyFormItmeWrapper = styled.div<{ isSelected?: boolean; isMargin?: boolean }>`
   margin-top: ${(props) => props.isMargin && '12px'};
-  border: ${(props) => props.isSelected && '3px solid blue'};
+  border-left: ${(props) => props.isSelected && '6px solid #4285f4 !important'};
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 3px 0 rgb(0 0 0 / 12%);
@@ -11,7 +11,6 @@ const SurveyFormItmeWrapper = styled.div<{ isSelected?: boolean; isMargin?: bool
   border: 1px solid #dadce0;
   border-radius: 8px;
   background-color: #fff;
-  position: relative;
 `;
 
 export default SurveyFormItmeWrapper;
