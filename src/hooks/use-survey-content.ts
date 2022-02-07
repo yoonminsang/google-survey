@@ -3,23 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { addSurveyItem, chagneSurveyType, changeSurveyItem, changeSurveyTitle, selectSurvey } from '@/store/survey';
 import { TSurveyType } from '@/types/survey';
+import { findSurveyId } from '@/utils';
 
 export const useSurveyContent = () => {
   const dispatch = useDispatch();
   const surveys = useSelector((state: RootState) => state.survey.surveys);
   const selected = useSelector((state: RootState) => state.survey.selected);
-  // TODO: usecallback??
-  const findId = (id: number) => {
-    const idIndex = surveys.findIndex((survey) => survey.id === id);
-    if (idIndex === -1) {
-      console.error('addSurveyItem id not found');
-    }
-    return idIndex;
-  };
 
   const onChangeSurveyTitle = (e: React.ChangeEvent, id: number) => {
     const { value } = e.target as HTMLInputElement | HTMLTextAreaElement;
-    const idIndex = findId(id);
+    const idIndex = findSurveyId(surveys, id);
     dispatch({ type: changeSurveyTitle.type, payload: { idIndex, value } });
   };
   const onChangeSurveyItem = (e: React.ChangeEvent, id: number, dataIndex: number) => {
@@ -28,16 +21,17 @@ export const useSurveyContent = () => {
     dispatch({ type: changeSurveyItem.type, payload: { idIndex, dataIndex, value } });
   };
   const onChangeSurveyType = (id: number, type: TSurveyType) => {
-    const idIndex = findId(id);
+    const idIndex = findSurveyId(surveys, id);
     dispatch({ type: chagneSurveyType.type, payload: { idIndex, type } });
   };
   const onAddSurveyItem = (id: number) => {
-    const idIndex = findId(id);
+    const idIndex = findSurveyId(surveys, id);
     const dataLength = surveys[idIndex].data.length;
     const nextSurveyItem = `옵션 ${dataLength + 1}`;
     dispatch({ type: addSurveyItem.type, payload: { idIndex, nextSurveyItem } });
   };
   const onSelectSurvey = (id: number) => {
+    if (id === selected) return;
     dispatch({ type: selectSurvey.type, payload: id });
   };
 
