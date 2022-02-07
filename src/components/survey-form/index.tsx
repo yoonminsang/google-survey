@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SurveyFormContent from './survey-form-content';
 import SurveyFormHeader from './survey-form-header';
+import SurveyFormSidebar from './survey-form-sidebar';
 
 const Wrapper = styled.div`
   background-color: #f0ebf8;
@@ -12,7 +13,8 @@ const Wrapper = styled.div`
 `;
 
 const Form = styled.form`
-  width: 800px;
+  width: 770px;
+  position: relative;
 `;
 
 const SurveyForm: React.FC = () => {
@@ -21,6 +23,7 @@ const SurveyForm: React.FC = () => {
       <Form>
         <SurveyFormHeader />
         <SurveyFormContent />
+        <SurveyFormSidebar />
       </Form>
     </Wrapper>
   );
