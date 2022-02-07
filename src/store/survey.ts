@@ -25,6 +25,7 @@ const initialState: IState = {
       title: '',
       data: ['옵션 1'],
       isNeccessary: false,
+      etc: false,
     },
   ],
   selected: null,
@@ -61,6 +62,14 @@ const slice = createSlice({
     removeSurveyItem: (state, action: PayloadAction<{ idIndex: number; dataIndex: number }>) => {
       const { idIndex, dataIndex } = action.payload;
       state.surveys[idIndex].data.splice(dataIndex, 1);
+    },
+    addSurveyEtc: (state, action: PayloadAction<number>) => {
+      const idIndex = action.payload;
+      state.surveys[idIndex].etc = true;
+    },
+    removeSurveyEtc: (state, action: PayloadAction<number>) => {
+      const idIndex = action.payload;
+      state.surveys[idIndex].etc = false;
     },
     chagneSurveyType: (state, action: PayloadAction<{ idIndex: number; type: TSurveyType }>) => {
       const { idIndex, type } = action.payload;
@@ -106,6 +115,8 @@ const {
   removeSurveyItem,
   removeSurvey,
   copySurvey,
+  addSurveyEtc,
+  removeSurveyEtc,
 } = actions;
 
 export {
@@ -122,4 +133,6 @@ export {
   removeSurveyItem,
   removeSurvey,
   copySurvey,
+  addSurveyEtc,
+  removeSurveyEtc,
 };
