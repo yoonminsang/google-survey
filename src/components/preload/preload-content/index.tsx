@@ -10,9 +10,9 @@ const PreloadContent = () => {
   const surveys = useSelector((state: RootState) => state.survey.surveys);
   return (
     <Wrapper>
-      {surveys.map((survey) => {
+      {surveys.map((survey, index) => {
         const { id } = survey;
-        return <PreloadItem key={id} survey={survey} />;
+        return <PreloadItem key={id} survey={survey} index={index} />;
       })}
     </Wrapper>
   );
