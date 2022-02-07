@@ -37,7 +37,6 @@ interface IProps {
   isNeccessary: boolean;
 }
 const SurveyItemMenu: React.FC<IProps> = ({ id, isNeccessary }) => {
-  // TODO: 수정삭제
   const { onChangeSurveyNeccessary, onRemoveSurvey, onCopySurvey } = useSurveyMenu();
   return (
     <Wrapper>
