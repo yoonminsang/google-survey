@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SurveyFormItmeWrapper = styled.div<{ isSelected?: boolean; isMargin?: boolean }>`
+const SurveyFormItmeWrapper = styled.div<{ isSelected?: boolean; isMargin?: boolean; isPadding?: boolean }>`
+  padding: ${(props) => props.isPadding && '24px'};
   margin-top: ${(props) => props.isMargin && '12px'};
   border-left: ${(props) => props.isSelected && '6px solid #4285f4 !important'};
   display: flex;
