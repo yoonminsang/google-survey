@@ -19,10 +19,11 @@ export const useSurveyMenu = () => {
   const onCopySurvey = (id: number) => {
     const idIndex = findSurveyId(surveys, id);
     const maxId = Math.max(...surveys.map((survey) => survey.id));
+    const nextId = maxId + 1;
     const nextSurvey = produce(surveys[idIndex], (draft) => {
-      draft.id = maxId + 1;
+      draft.id = nextId;
     });
-    dispatch({ type: copySurvey.type, payload: { idIndex, nextSurvey } });
+    dispatch({ type: copySurvey.type, payload: { idIndex, nextId, nextSurvey } });
   };
   return { onChangeSurveyNeccessary, onRemoveSurvey, onCopySurvey };
 };

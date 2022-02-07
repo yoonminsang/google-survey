@@ -30,7 +30,6 @@ const initialState: IState = {
   selected: null,
 };
 
-// TODO: 사가 적용할지 생각
 const slice = createSlice({
   name: 'survey',
   initialState,
@@ -80,10 +79,14 @@ const slice = createSlice({
     removeSurvey: (state, action: PayloadAction<number>) => {
       const idIndex = action.payload;
       state.surveys.splice(idIndex, 1);
+      if (state.surveys.length === 0) state.selected = null;
+      else if (idIndex === 0) state.selected = state.surveys[0].id;
+      else state.selected = state.surveys[idIndex - 1].id;
     },
-    copySurvey: (state, action: PayloadAction<{ idIndex: number; nextSurvey: TSurvey }>) => {
-      const { idIndex, nextSurvey } = action.payload;
-      state.surveys.splice(idIndex, 0, nextSurvey);
+    copySurvey: (state, action: PayloadAction<{ idIndex: number; nextId: number; nextSurvey: TSurvey }>) => {
+      const { idIndex, nextId, nextSurvey } = action.payload;
+      state.surveys.splice(idIndex + 1, 0, nextSurvey);
+      state.selected = nextId;
     },
     preloadSurvey: (state, action) => state,
   },
