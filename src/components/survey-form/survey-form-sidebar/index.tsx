@@ -7,7 +7,7 @@ import { useSurveySidebar } from '@/hooks/use-survey-sidebar';
 
 const Wrapper = styled(SurveyFormItmeWrapper)`
   position: absolute;
-  right: -90px;
+  right: -70px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   width: 50px;
   display: flex;
