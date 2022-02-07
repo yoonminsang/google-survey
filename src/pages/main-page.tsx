@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -35,17 +35,20 @@ const MainPage: React.FC = () => {
   const [value, setValue] = React.useState(QUESTION);
   const handleChange = useCallback((e: React.SyntheticEvent, newValue: string) => {
     setValue(newValue);
-    location.hash = (e.target as HTMLElement).dataset.hash as string;
   }, []);
+
+  useEffect(() => {
+    location.hash = value;
+  }, [value]);
 
   return (
     <Wrapper>
       <TabContext value={value}>
         <TabListWrapper>
           <TabList onChange={handleChange} aria-label="survey">
-            <Tab label="질문" value={QUESTION} data-hash={QUESTION} />
-            <Tab label="미리보기" value={PRELOAD} data-hash={PRELOAD} />
-            <Tab label="응답" value={ANSWER} data-hash={ANSWER} />
+            <Tab label="질문" value={QUESTION} />
+            <Tab label="미리보기" value={PRELOAD} />
+            <Tab label="응답" value={ANSWER} />
           </TabList>
         </TabListWrapper>
         <TabPanelWrapper>
