@@ -75,6 +75,9 @@ interface IProps {
   id: number;
   onAddSurveyItem: (id: number) => void;
   onRemoveSurveyItem: (id: number, dataIndex: number) => void;
+  onAddSurveyEtc: (id: number) => void;
+  onRemoveSurveyEtc: (id: number) => void;
+  etc: boolean;
 }
 
 const SurveyItemComplexList: React.FC<IProps> = ({
@@ -85,6 +88,9 @@ const SurveyItemComplexList: React.FC<IProps> = ({
   id,
   onAddSurveyItem,
   onRemoveSurveyItem,
+  onAddSurveyEtc,
+  onRemoveSurveyEtc,
+  etc,
 }) => {
   const Icon = type === 'multiple' ? RadioIcon : CheckBoxIcon;
   return (
@@ -101,16 +107,31 @@ const SurveyItemComplexList: React.FC<IProps> = ({
           )}
         </ListWrapper>
       ))}
+      {etc && (
+        <ListWrapper>
+          <DrapWrapper></DrapWrapper>
+          {Icon}
+          <CustomInput value="기타..." style={{ color: '#70757a' }} readOnly />
+          <RemoveButton type="button" onClick={() => onRemoveSurveyEtc(id)}>
+            <ClearIcon />
+          </RemoveButton>
+        </ListWrapper>
+      )}
       <ListWrapper>
         <DrapWrapper></DrapWrapper>
         {Icon}
-        {/* TODO: 기타추가, 스타일, 클릭이벤트 옵션추가에만 */}
         <AddWrapper>
           <AddOption type="button" onClick={() => onAddSurveyItem(id)}>
             옵션 추가
           </AddOption>
-          <span>또는</span>
-          <AddEtc type="button">'기타'추가</AddEtc>
+          {!etc && (
+            <>
+              <span>또는</span>
+              <AddEtc type="button" onClick={() => onAddSurveyEtc(id)}>
+                '기타'추가
+              </AddEtc>
+            </>
+          )}
         </AddWrapper>
       </ListWrapper>
     </SurveyItemListWrapper>

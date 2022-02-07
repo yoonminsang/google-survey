@@ -35,6 +35,8 @@ interface IProps {
   onAddSurveyItem: (id: number) => void;
   onSelectSurvey: (id: number) => void;
   onRemoveSurveyItem: (id: number, dataIndex: number) => void;
+  onAddSurveyEtc: (id: number) => void;
+  onRemoveSurveyEtc: (id: number) => void;
 }
 
 const getList = (
@@ -45,6 +47,9 @@ const getList = (
   id: number,
   onAddSurveyItem: (id: number) => void,
   onRemoveSurveyItem: (id: number, dataIndex: number) => void,
+  onAddSurveyEtc: (id: number) => void,
+  onRemoveSurveyEtc: (id: number) => void,
+  etc: boolean,
 ) => {
   switch (type) {
     case 'short':
@@ -61,6 +66,9 @@ const getList = (
           id={id}
           onAddSurveyItem={onAddSurveyItem}
           onRemoveSurveyItem={onRemoveSurveyItem}
+          onAddSurveyEtc={onAddSurveyEtc}
+          onRemoveSurveyEtc={onRemoveSurveyEtc}
+          etc={etc}
         />
       );
     case 'dropdown':
@@ -86,8 +94,10 @@ const SurveyItem: React.FC<IProps> = ({
   onAddSurveyItem,
   onSelectSurvey,
   onRemoveSurveyItem,
+  onAddSurveyEtc,
+  onRemoveSurveyEtc,
 }) => {
-  const { id, type, title, data, isNeccessary } = survey;
+  const { id, type, title, data, isNeccessary, etc } = survey;
   return (
     <SurveyFormItmeWrapper isMargin isSelected={isSelected} onClick={() => onSelectSurvey(id)}>
       <DrapWrapper></DrapWrapper>
@@ -100,7 +110,18 @@ const SurveyItem: React.FC<IProps> = ({
         />
         <SurveyItemSelect id={id} isSelected={isSelected} type={type} onChangeSurveyType={onChangeSurveyType} />
       </Flex>
-      {getList(type, data, isSelected, onChangeSurveyItem, id, onAddSurveyItem, onRemoveSurveyItem)}
+      {getList(
+        type,
+        data,
+        isSelected,
+        onChangeSurveyItem,
+        id,
+        onAddSurveyItem,
+        onRemoveSurveyItem,
+        onAddSurveyEtc,
+        onRemoveSurveyEtc,
+        etc,
+      )}
       {isSelected && <SurveyItemMenu id={id} isNeccessary={isNeccessary} />}
     </SurveyFormItmeWrapper>
   );

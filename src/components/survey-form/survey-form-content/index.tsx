@@ -15,6 +15,8 @@ const SurveyFormContent: React.FC = () => {
     onAddSurveyItem,
     onSelectSurvey,
     onRemoveSurveyItem,
+    onAddSurveyEtc,
+    onRemoveSurveyEtc,
   } = useSurveyContent();
   return (
     <Wrapper>
@@ -31,6 +33,8 @@ const SurveyFormContent: React.FC = () => {
             onAddSurveyItem={onAddSurveyItem}
             onSelectSurvey={onSelectSurvey}
             onRemoveSurveyItem={onRemoveSurveyItem}
+            onAddSurveyEtc={onAddSurveyEtc}
+            onRemoveSurveyEtc={onRemoveSurveyEtc}
           />
         );
       })}
