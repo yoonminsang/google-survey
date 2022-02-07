@@ -7,7 +7,7 @@ export const useSurveySidebar = () => {
   const dispatch = useDispatch();
   const surveys = useSelector((state: RootState) => state.survey.surveys);
   const onAddSurvey = () => {
-    const maxId = Math.max(...surveys.map((survey) => survey.id));
+    const maxId = surveys.length > 0 ? Math.max(...surveys.map((survey) => survey.id)) : 0;
     const nextSurvey = {
       id: maxId + 1,
       type: 'multiple',
