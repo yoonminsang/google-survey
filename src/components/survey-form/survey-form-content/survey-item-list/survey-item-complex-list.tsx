@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { Input } from '@mui/material';
 import CheckBoxOutlineBlankRoundedIcon from '@mui/icons-material/CheckBoxOutlineBlankRounded';
 import RadioButtonUncheckedRoundedIcon from '@mui/icons-material/RadioButtonUncheckedRounded';
+import ClearIcon from '@mui/icons-material/Clear';
 import SurveyItemListWrapper from '../../styled/survey-item-list-wrapper';
 
+// TODO: 드롭다운, 컴플렉스 리스트 재사용
 const DrapWrapper = styled.div`
   width: 24px;
 `;
@@ -52,6 +54,8 @@ const AddEtc = styled.button`
   }
 `;
 
+const RemoveButton = styled.button``;
+
 const RadioIcon = (
   <IconWrapper>
     <RadioButtonUncheckedRoundedIcon />
@@ -70,6 +74,7 @@ interface IProps {
   onChangeSurveyItem: (e: React.ChangeEvent, id: number, dataIndex: number) => void;
   id: number;
   onAddSurveyItem: (id: number) => void;
+  onRemoveSurveyItem: (id: number, dataIndex: number) => void;
 }
 
 const SurveyItemComplexList: React.FC<IProps> = ({
@@ -79,6 +84,7 @@ const SurveyItemComplexList: React.FC<IProps> = ({
   onChangeSurveyItem,
   id,
   onAddSurveyItem,
+  onRemoveSurveyItem,
 }) => {
   const Icon = type === 'multiple' ? RadioIcon : CheckBoxIcon;
   return (
@@ -88,6 +94,11 @@ const SurveyItemComplexList: React.FC<IProps> = ({
           <DrapWrapper></DrapWrapper>
           {Icon}
           <CustomInput value={str} onChange={(e: React.ChangeEvent) => onChangeSurveyItem(e, id, dataIndex)} />
+          {isSelected && data.length > 1 && (
+            <RemoveButton type="button" onClick={() => onRemoveSurveyItem(id, dataIndex)}>
+              <ClearIcon />
+            </RemoveButton>
+          )}
         </ListWrapper>
       ))}
       <ListWrapper>

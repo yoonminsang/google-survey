@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Input } from '@mui/material';
+import ClearIcon from '@mui/icons-material/Clear';
 import SurveyItemListWrapper from '../../styled/survey-item-list-wrapper';
 
 const DrapWrapper = styled.div`
@@ -42,15 +43,25 @@ const AddOption = styled.button`
   }
 `;
 
+const RemoveButton = styled.button``;
+
 interface IProps {
   data: string[];
   isSelected: boolean;
   onChangeSurveyItem: (e: React.ChangeEvent, id: number, dataIndex: number) => void;
   id: number;
   onAddSurveyItem: (id: number) => void;
+  onRemoveSurveyItem: (id: number, dataIndex: number) => void;
 }
 
-const SurveyItemDropdownList: React.FC<IProps> = ({ data, isSelected, onChangeSurveyItem, id, onAddSurveyItem }) => {
+const SurveyItemDropdownList: React.FC<IProps> = ({
+  data,
+  isSelected,
+  onChangeSurveyItem,
+  id,
+  onAddSurveyItem,
+  onRemoveSurveyItem,
+}) => {
   return (
     <SurveyItemListWrapper isSelected={isSelected}>
       {data.map((str, dataIndex) => (
@@ -58,6 +69,11 @@ const SurveyItemDropdownList: React.FC<IProps> = ({ data, isSelected, onChangeSu
           <DrapWrapper></DrapWrapper>
           <DropdownWrapper>{dataIndex + 1}</DropdownWrapper>
           <CustomInput value={str} onChange={(e: React.ChangeEvent) => onChangeSurveyItem(e, id, dataIndex)} />
+          {isSelected && data.length > 1 && (
+            <RemoveButton type="button" onClick={() => onRemoveSurveyItem(id, dataIndex)}>
+              <ClearIcon />
+            </RemoveButton>
+          )}
         </ListWrapper>
       ))}
       <ListWrapper>

@@ -54,13 +54,14 @@ const slice = createSlice({
       const { idIndex, dataIndex, value } = action.payload;
       state.surveys[idIndex].data[dataIndex] = value;
     },
-    addSurvey: (state, action: PayloadAction<TSurvey>) => {
-      state.surveys.push(action.payload);
-    },
     addSurveyItem: (state, action: PayloadAction<{ idIndex: number; nextSurveyItem: string }>) => {
       const { idIndex, nextSurveyItem } = action.payload;
       const { data } = state.surveys[idIndex];
       data.push(nextSurveyItem);
+    },
+    removeSurveyItem: (state, action: PayloadAction<{ idIndex: number; dataIndex: number }>) => {
+      const { idIndex, dataIndex } = action.payload;
+      state.surveys[idIndex].data.splice(dataIndex, 1);
     },
     chagneSurveyType: (state, action: PayloadAction<{ idIndex: number; type: TSurveyType }>) => {
       const { idIndex, type } = action.payload;
@@ -74,6 +75,9 @@ const slice = createSlice({
       state.surveys[idIndex].isNeccessary = !state.surveys[idIndex].isNeccessary;
     },
     // TODO: DELETE, COPY
+    addSurvey: (state, action: PayloadAction<TSurvey>) => {
+      state.surveys.push(action.payload);
+    },
     preloadSurvey: (state, action) => state,
   },
 });
@@ -89,6 +93,7 @@ const {
   selectSurvey,
   preloadSurvey,
   chagneSurveyType,
+  removeSurveyItem,
 } = actions;
 
 export {
@@ -102,4 +107,5 @@ export {
   selectSurvey,
   preloadSurvey,
   chagneSurveyType,
+  removeSurveyItem,
 };

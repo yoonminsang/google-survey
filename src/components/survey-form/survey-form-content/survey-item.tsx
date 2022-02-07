@@ -34,6 +34,7 @@ interface IProps {
   onChangeSurveyType: (id: number, type: TSurveyType) => void;
   onAddSurveyItem: (id: number) => void;
   onSelectSurvey: (id: number) => void;
+  onRemoveSurveyItem: (id: number, dataIndex: number) => void;
 }
 
 const getList = (
@@ -43,6 +44,7 @@ const getList = (
   onChangeSurveyItem: (e: React.ChangeEvent, id: number, dataIndex: number) => void,
   id: number,
   onAddSurveyItem: (id: number) => void,
+  onRemoveSurveyItem: (id: number, dataIndex: number) => void,
 ) => {
   switch (type) {
     case 'short':
@@ -58,6 +60,7 @@ const getList = (
           onChangeSurveyItem={onChangeSurveyItem}
           id={id}
           onAddSurveyItem={onAddSurveyItem}
+          onRemoveSurveyItem={onRemoveSurveyItem}
         />
       );
     case 'dropdown':
@@ -68,6 +71,7 @@ const getList = (
           onChangeSurveyItem={onChangeSurveyItem}
           id={id}
           onAddSurveyItem={onAddSurveyItem}
+          onRemoveSurveyItem={onRemoveSurveyItem}
         />
       );
   }
@@ -81,6 +85,7 @@ const SurveyItem: React.FC<IProps> = ({
   onChangeSurveyType,
   onAddSurveyItem,
   onSelectSurvey,
+  onRemoveSurveyItem,
 }) => {
   const { id, type, title, data, isNeccessary } = survey;
   return (
@@ -90,7 +95,7 @@ const SurveyItem: React.FC<IProps> = ({
         <Title inputComponent="textarea" value={title} onChange={(e) => onChangeSurveyTitle(e, id)} />
         <SurveyItemSelect id={id} isSelected={isSelected} type={type} onChangeSurveyType={onChangeSurveyType} />
       </Flex>
-      {getList(type, data, isSelected, onChangeSurveyItem, id, onAddSurveyItem)}
+      {getList(type, data, isSelected, onChangeSurveyItem, id, onAddSurveyItem, onRemoveSurveyItem)}
       {isSelected && <SurveyItemMenu id={id} isNeccessary={isNeccessary} />}
     </SurveyFormItmeWrapper>
   );

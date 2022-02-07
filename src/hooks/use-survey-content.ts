@@ -1,7 +1,14 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { addSurveyItem, chagneSurveyType, changeSurveyItem, changeSurveyTitle, selectSurvey } from '@/store/survey';
+import {
+  addSurveyItem,
+  chagneSurveyType,
+  changeSurveyItem,
+  changeSurveyTitle,
+  removeSurveyItem,
+  selectSurvey,
+} from '@/store/survey';
 import { TSurveyType } from '@/types/survey';
 import { findSurveyId } from '@/utils';
 
@@ -30,6 +37,10 @@ export const useSurveyContent = () => {
     const nextSurveyItem = `옵션 ${dataLength + 1}`;
     dispatch({ type: addSurveyItem.type, payload: { idIndex, nextSurveyItem } });
   };
+  const onRemoveSurveyItem = (id: number, dataIndex: number) => {
+    const idIndex = findSurveyId(surveys, id);
+    dispatch({ type: removeSurveyItem.type, payload: { idIndex, dataIndex } });
+  };
   const onSelectSurvey = (id: number) => {
     if (id === selected) return;
     dispatch({ type: selectSurvey.type, payload: id });
@@ -43,5 +54,6 @@ export const useSurveyContent = () => {
     onChangeSurveyType,
     onAddSurveyItem,
     onSelectSurvey,
+    onRemoveSurveyItem,
   };
 };
