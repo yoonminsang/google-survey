@@ -74,9 +74,16 @@ const slice = createSlice({
       const idIndex = action.payload;
       state.surveys[idIndex].isNeccessary = !state.surveys[idIndex].isNeccessary;
     },
-    // TODO: DELETE, COPY
     addSurvey: (state, action: PayloadAction<TSurvey>) => {
       state.surveys.push(action.payload);
+    },
+    removeSurvey: (state, action: PayloadAction<number>) => {
+      const idIndex = action.payload;
+      state.surveys.splice(idIndex, 1);
+    },
+    copySurvey: (state, action: PayloadAction<{ idIndex: number; nextSurvey: TSurvey }>) => {
+      const { idIndex, nextSurvey } = action.payload;
+      state.surveys.splice(idIndex, 0, nextSurvey);
     },
     preloadSurvey: (state, action) => state,
   },
@@ -94,6 +101,8 @@ const {
   preloadSurvey,
   chagneSurveyType,
   removeSurveyItem,
+  removeSurvey,
+  copySurvey,
 } = actions;
 
 export {
@@ -108,4 +117,6 @@ export {
   preloadSurvey,
   chagneSurveyType,
   removeSurveyItem,
+  removeSurvey,
+  copySurvey,
 };

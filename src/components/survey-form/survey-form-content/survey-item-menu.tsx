@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -38,14 +38,14 @@ interface IProps {
 }
 const SurveyItemMenu: React.FC<IProps> = ({ id, isNeccessary }) => {
   // TODO: 수정삭제
-  const { onChangeSurveyNeccessary } = useSurveyMenu();
+  const { onChangeSurveyNeccessary, onRemoveSurvey, onCopySurvey } = useSurveyMenu();
   return (
     <Wrapper>
       <Flex>
-        <IconButton type="button">
+        <IconButton type="button" onClick={() => onCopySurvey(id)}>
           <ContentCopyIcon sx={{ fontSize: 25 }} />
         </IconButton>
-        <IconButton type="button">
+        <IconButton type="button" onClick={() => onRemoveSurvey(id)}>
           <DeleteOutlineIcon sx={{ fontSize: 25 }} />
         </IconButton>
         <Block />
