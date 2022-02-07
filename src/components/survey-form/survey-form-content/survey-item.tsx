@@ -27,10 +27,7 @@ const Title = styled(FilledInput)`
 `;
 
 interface IProps {
-  id: number;
-  type: TSurveyType;
-  title: string;
-  data: string[];
+  survey: TSurvey;
   isSelected: boolean;
   onChangeSurveyTitle: (e: React.ChangeEvent, id: number) => void;
   onChangeSurveyItem: (e: React.ChangeEvent, id: number, dataIndex: number) => void;
@@ -77,10 +74,7 @@ const getList = (
 };
 
 const SurveyItem: React.FC<IProps> = ({
-  id,
-  type,
-  title,
-  data,
+  survey,
   isSelected,
   onChangeSurveyTitle,
   onChangeSurveyItem,
@@ -88,6 +82,7 @@ const SurveyItem: React.FC<IProps> = ({
   onAddSurveyItem,
   onSelectSurvey,
 }) => {
+  const { id, type, title, data, isNeccessary } = survey;
   return (
     <SurveyFormItmeWrapper isMargin isSelected={isSelected} onClick={() => onSelectSurvey(id)}>
       <DrapWrapper></DrapWrapper>
@@ -96,7 +91,7 @@ const SurveyItem: React.FC<IProps> = ({
         <SurveyItemSelect id={id} isSelected={isSelected} type={type} onChangeSurveyType={onChangeSurveyType} />
       </Flex>
       {getList(type, data, isSelected, onChangeSurveyItem, id, onAddSurveyItem)}
-      {isSelected && <SurveyItemMenu id={id} />}
+      {isSelected && <SurveyItemMenu id={id} isNeccessary={isNeccessary} />}
     </SurveyFormItmeWrapper>
   );
 };

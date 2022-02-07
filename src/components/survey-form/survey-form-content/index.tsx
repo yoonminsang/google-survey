@@ -18,14 +18,11 @@ const SurveyFormContent: React.FC = () => {
   return (
     <Wrapper>
       {surveys.map((survey) => {
-        const { id, type, title, data } = survey;
+        const { id } = survey;
         return (
           <SurveyItem
             key={id}
-            id={id}
-            type={type}
-            title={title}
-            data={data}
+            survey={survey}
             isSelected={selected === id}
             onChangeSurveyTitle={onChangeSurveyTitle}
             onChangeSurveyItem={onChangeSurveyItem}
