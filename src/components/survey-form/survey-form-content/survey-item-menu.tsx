@@ -5,6 +5,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Switch } from '@mui/material';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { useSurveyMenu } from '@/hooks/use-survey-menu';
 
 const Wrapper = styled.div`
   border-top: 1px solid #dadce0;
@@ -33,10 +34,11 @@ const Block = styled.div`
 
 interface IProps {
   id: number;
+  isNeccessary: boolean;
 }
-const SurveyItemMenu: React.FC<IProps> = ({ id }) => {
-  // 커스텀훅으로 3개이벤트랑 state값 id로 가져오기
-  const [check, setCheck] = useState(false);
+const SurveyItemMenu: React.FC<IProps> = ({ id, isNeccessary }) => {
+  // TODO: 수정삭제
+  const { onChangeSurveyNeccessary } = useSurveyMenu();
   return (
     <Wrapper>
       <Flex>
@@ -49,7 +51,7 @@ const SurveyItemMenu: React.FC<IProps> = ({ id }) => {
         <Block />
         <FormGroup>
           <FormControlLabel
-            control={<Switch checked={check} onClick={() => setCheck((check) => !check)} />}
+            control={<Switch checked={isNeccessary} onClick={() => onChangeSurveyNeccessary(id)} />}
             label="필수"
             labelPlacement="start"
           />
