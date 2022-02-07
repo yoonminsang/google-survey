@@ -35,7 +35,6 @@ interface IProps {
   onChangeSurveyTitle: (e: React.ChangeEvent, id: number) => void;
   onChangeSurveyItem: (e: React.ChangeEvent, id: number, dataIndex: number) => void;
   onChangeSurveyType: (id: number, type: TSurveyType) => void;
-  onAddSurvey: () => void;
   onAddSurveyItem: (id: number) => void;
   onSelectSurvey: (id: number) => void;
 }
@@ -86,7 +85,6 @@ const SurveyItem: React.FC<IProps> = ({
   onChangeSurveyTitle,
   onChangeSurveyItem,
   onChangeSurveyType,
-  onAddSurvey,
   onAddSurveyItem,
   onSelectSurvey,
 }) => {
@@ -94,12 +92,7 @@ const SurveyItem: React.FC<IProps> = ({
     <SurveyFormItmeWrapper isMargin isSelected={isSelected} onClick={() => onSelectSurvey(id)}>
       <DrapWrapper></DrapWrapper>
       <Flex>
-        <Title
-          inputComponent="textarea"
-          value={title}
-          readOnly={!isSelected}
-          onChange={(e) => onChangeSurveyTitle(e, id)}
-        />
+        <Title inputComponent="textarea" value={title} onChange={(e) => onChangeSurveyTitle(e, id)} />
         <SurveyItemSelect id={id} isSelected={isSelected} type={type} onChangeSurveyType={onChangeSurveyType} />
       </Flex>
       {getList(type, data, isSelected, onChangeSurveyItem, id, onAddSurveyItem)}

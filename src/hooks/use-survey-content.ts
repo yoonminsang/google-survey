@@ -1,14 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import {
-  addSurvey,
-  addSurveyItem,
-  chagneSurveyType,
-  changeSurveyItem,
-  changeSurveyTitle,
-  selectSurvey,
-} from '@/store/survey';
+import { addSurveyItem, chagneSurveyType, changeSurveyItem, changeSurveyTitle, selectSurvey } from '@/store/survey';
 import { TSurveyType } from '@/types/survey';
 
 export const useSurveyContent = () => {
@@ -38,17 +31,6 @@ export const useSurveyContent = () => {
     const idIndex = findId(id);
     dispatch({ type: chagneSurveyType.type, payload: { idIndex, type } });
   };
-  const onAddSurvey = () => {
-    const maxId = Math.max(...surveys.map((survey) => survey.id));
-    const nextSurvey = {
-      id: maxId + 1,
-      type: 'multiple',
-      title: '',
-      data: ['옵션 1'],
-      isNeccessary: false,
-    };
-    dispatch({ type: addSurvey.type, payload: nextSurvey });
-  };
   const onAddSurveyItem = (id: number) => {
     const idIndex = findId(id);
     const dataLength = surveys[idIndex].data.length;
@@ -65,7 +47,6 @@ export const useSurveyContent = () => {
     onChangeSurveyTitle,
     onChangeSurveyItem,
     onChangeSurveyType,
-    onAddSurvey,
     onAddSurveyItem,
     onSelectSurvey,
   };

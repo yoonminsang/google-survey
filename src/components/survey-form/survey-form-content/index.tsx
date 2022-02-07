@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SurveyItem from './survey-item';
-import { useSurveyContent } from '@/hooks/useSurveyContent';
+import { useSurveyContent } from '@/hooks/use-survey-content';
 
 const Wrapper = styled.div``;
 
@@ -12,7 +12,6 @@ const SurveyFormContent: React.FC = () => {
     onChangeSurveyTitle,
     onChangeSurveyItem,
     onChangeSurveyType,
-    onAddSurvey,
     onAddSurveyItem,
     onSelectSurvey,
   } = useSurveyContent();
@@ -31,7 +30,6 @@ const SurveyFormContent: React.FC = () => {
             onChangeSurveyTitle={onChangeSurveyTitle}
             onChangeSurveyItem={onChangeSurveyItem}
             onChangeSurveyType={onChangeSurveyType}
-            onAddSurvey={onAddSurvey}
             onAddSurveyItem={onAddSurveyItem}
             onSelectSurvey={onSelectSurvey}
           />

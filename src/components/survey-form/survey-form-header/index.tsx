@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Input } from '@mui/material';
 import SurveyFormItmeWrapper from '../styled/sruvey-form-item-wrapper';
-import { useSurveyHeader } from '@/hooks/useSurveyHeader';
+import { useSurveyHeader } from '@/hooks/use-survey-header';
 
 const Wrapper = styled(SurveyFormItmeWrapper)`
   > div {
