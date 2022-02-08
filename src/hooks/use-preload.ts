@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { changeAnswerStr, init } from '@/store/preload';
+import { changeAnswerStr, changeEtcAnswer, init } from '@/store/preload';
 import { SelectChangeEvent } from '@mui/material';
 
 export const usePreload = () => {
@@ -10,16 +10,24 @@ export const usePreload = () => {
   const { preload } = useSelector((state: RootState) => state.preload);
 
   const onInit = () => {
-    const nextPreload = surveys.map(({ id, type, title, isNeccessary, etc }) => {
+    const nextPreload = surveys.map(({ id, data, type, title, isNeccessary, etc }) => {
       switch (type) {
         case 'short':
         case 'long':
         case 'dropdown':
           return { id, type, title, answer: '', isNeccessary };
         case 'multiple':
-          return { id, type, title, answer: '', isNeccessary, isEtc: etc, etcAnswer: '' };
+          return { id, type, title, answer: '', isNeccessary, etcAnswer: '' };
         case 'checkbox':
-          return { id, type, title, answer: [], isNeccessary, isEtc: etc, etcAnswer: '' };
+          return {
+            id,
+            type,
+            title,
+            checkArr: Array(data.length).fill(false),
+            answer: [],
+            isNeccessary,
+            etcAnswer: '',
+          };
       }
     });
     dispatch({ type: init.type, payload: nextPreload });
@@ -31,14 +39,16 @@ export const usePreload = () => {
     const answer = e.target.value;
     dispatch({ type: changeAnswerStr.type, payload: { index, answer } });
   };
-  const onChangeAnswerStrByClick = (e: SelectChangeEvent) => {
-    console.log(e.target.value);
+  const onChangeEtcAnswer = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
+    const etcAnswer = e.target.value;
+    console.log('onchagne answer etc', etcAnswer, index);
+    dispatch({ type: changeEtcAnswer.type, payload: { index, etcAnswer } });
   };
 
   return {
     preload,
     onInit,
     onChangeAnswerStr,
-    onChangeAnswerStrByClick,
+    onChangeEtcAnswer,
   };
 };

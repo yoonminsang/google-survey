@@ -1,4 +1,4 @@
-import { IPreload, TPreload } from '@/types/preload';
+import { IPreload, IPreloadCheckbox, IPreloadMultiple, TPreload } from '@/types/preload';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: IPreload = {
@@ -16,10 +16,14 @@ const slice = createSlice({
       const { index, answer } = action.payload;
       state.preload[index].answer = answer;
     },
+    changeEtcAnswer: (state, action: PayloadAction<{ index: number; etcAnswer: string }>) => {
+      const { index, etcAnswer } = action.payload;
+      (state.preload[index] as IPreloadMultiple | IPreloadCheckbox).etcAnswer = etcAnswer;
+    },
   },
 });
 
 const { actions, reducer: preloadReducer } = slice;
-const { init, changeAnswerStr } = actions;
+const { init, changeAnswerStr, changeEtcAnswer } = actions;
 
-export { preloadReducer, init, changeAnswerStr };
+export { preloadReducer, init, changeAnswerStr, changeEtcAnswer };
