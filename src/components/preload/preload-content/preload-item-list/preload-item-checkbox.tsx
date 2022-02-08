@@ -59,13 +59,11 @@ const PreloadItemCheckbox: React.FC<IProps> = ({
                 />
               }
             />
-            {
-              <Input
-                sx={{ width: '498px', margin: '0px !important' }}
-                value={etcAnswer}
-                onChange={(e) => onChangeEtcAnswer(e, index)}
-              />
-            }
+            <Input
+              sx={{ width: '498px', margin: '0px !important' }}
+              value={etcAnswer}
+              onChange={(e) => onChangeEtcAnswer(e, index)}
+            />
           </EtcWrapper>
         </FormControl>
       )}
