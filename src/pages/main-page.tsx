@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
@@ -6,7 +6,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import SurveyForm from '@/components/survey-form';
 import styled from 'styled-components';
 import Preload from '@/components/preload';
-import { useAnswer } from '@/hooks/use-answer';
+import { usePreloadInit } from '@/hooks/use-preload-init';
 
 const QUESTION = 'question';
 const PRELOAD = 'preload';
@@ -33,13 +33,13 @@ const TabPanelWrapper = styled.div`
 `;
 
 const MainPage: React.FC = () => {
-  const { onInit } = useAnswer();
+  const { onInit } = usePreloadInit();
   const [hash, setHash] = useState(QUESTION);
-  const handleChange = useCallback((e: React.SyntheticEvent, newHash: string) => {
+  const handleChange = (e: React.SyntheticEvent, newHash: string) => {
     if (newHash === PRELOAD) onInit();
     location.hash = hash;
     setHash(newHash);
-  }, []);
+  };
 
   return (
     <Wrapper>
