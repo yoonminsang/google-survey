@@ -1,7 +1,7 @@
 import React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { Input } from '@mui/material';
+import { FormControl, Input } from '@mui/material';
 import styled from 'styled-components';
 
 interface IProps {
@@ -36,13 +36,15 @@ const PreloadItemCheckbox: React.FC<IProps> = ({ id, data, etc }) => {
       <FormControlLabel label="Child 1" control={<Checkbox checked={checked[0]} value="0" onChange={handleChange} />} />
       <FormControlLabel label="Child 2" control={<Checkbox checked={checked[1]} value="1" onChange={handleChange} />} />
       {etc && (
-        <EtcWrapper>
-          <FormControlLabel
-            label="기타"
-            control={<Checkbox checked={checked[2]} value="2" onChange={handleChange} />}
-          />
-          {<Input sx={{ width: '498px', margin: '0px !important' }} />}
-        </EtcWrapper>
+        <FormControl>
+          <EtcWrapper>
+            <FormControlLabel
+              label="기타"
+              control={<Checkbox checked={checked[2]} value="2" onChange={handleChange} />}
+            />
+            {<Input sx={{ width: '498px', margin: '0px !important' }} />}
+          </EtcWrapper>
+        </FormControl>
       )}
     </Wrapper>
   );

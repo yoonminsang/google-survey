@@ -5,13 +5,12 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import { Input } from '@mui/material';
 import styled from 'styled-components';
-import { IPreloadMultiple, TPreload } from '@/types/preload';
+import { IPreloadMultiple } from '@/types/preload';
 
 interface IProps {
-  id: number;
   data: string[];
   etc: boolean;
-  preload: TPreload[];
+  preloadData: IPreloadMultiple;
   index: number;
   onChangeAnswerStr: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => void;
   onChangeEtcAnswer: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => void;
@@ -22,15 +21,14 @@ const EtcWrapper = styled.div`
 `;
 
 const PreloadItemMultiple: React.FC<IProps> = ({
-  id,
   data,
   etc,
-  preload,
+  preloadData,
   index,
   onChangeAnswerStr,
   onChangeEtcAnswer,
 }) => {
-  const { answer, etcAnswer } = preload[index] as IPreloadMultiple;
+  const { answer, etcAnswer } = preloadData;
   return (
     <FormControl>
       <RadioGroup value={answer} name="radio-buttons-group" onChange={(e) => onChangeAnswerStr(e, index)}>

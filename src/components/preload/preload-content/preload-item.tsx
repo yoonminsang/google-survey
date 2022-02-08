@@ -1,6 +1,6 @@
 import SurveyFormItmeWrapper from '@/components/survey-form/styled/sruvey-form-item-wrapper';
 import { usePreload } from '@/hooks/use-preload';
-import { TPreload } from '@/types/preload';
+import { IPreloadDropdown, IPreloadMultiple, IPreloadSimple, TPreload } from '@/types/preload';
 import { TSurvey, TSurveyType } from '@/types/survey';
 import { SelectChangeEvent } from '@mui/material';
 import React from 'react';
@@ -23,7 +23,6 @@ const Neccessary = styled.span`
   color: #d93025;
 `;
 
-// TODO: id 필요없을듯
 const getItem = (
   id: number,
   type: TSurveyType,
@@ -43,9 +42,8 @@ const getItem = (
       return (
         <PreloadItemSimple
           key={id}
-          id={id}
           type={type}
-          preload={preload}
+          preloadData={preload[index] as IPreloadSimple}
           index={index}
           onChangeAnswerStr={onChangeAnswerStr}
         />
@@ -53,10 +51,9 @@ const getItem = (
     case 'multiple':
       return (
         <PreloadItemMultiple
-          id={id}
           data={data}
           etc={etc}
-          preload={preload}
+          preloadData={preload[index] as IPreloadMultiple}
           index={index}
           onChangeAnswerStr={onChangeAnswerStr}
           onChangeEtcAnswer={onChangeEtcAnswer}
@@ -67,9 +64,8 @@ const getItem = (
     case 'dropdown':
       return (
         <PreloadItemDropdown
-          id={id}
           data={data}
-          preload={preload}
+          preloadData={preload[index] as IPreloadDropdown}
           index={index}
           onChangeAnswerStr={onChangeAnswerStr}
         />

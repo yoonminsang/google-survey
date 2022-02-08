@@ -1,12 +1,11 @@
 import React from 'react';
 import { FormControl, InputLabel, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import styled from 'styled-components';
-import { TPreload } from '@/types/preload';
+import { IPreloadDropdown } from '@/types/preload';
 
 interface IProps {
-  id: number;
   data: string[];
-  preload: TPreload[];
+  preloadData: IPreloadDropdown;
   index: number;
   onChangeAnswerStr: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>,
@@ -18,8 +17,8 @@ const Wrapper = styled(FormControl)`
   width: 176px;
 `;
 
-const PreloadItemDropdown: React.FC<IProps> = ({ id, data, preload, index, onChangeAnswerStr }) => {
-  const answer = preload[index].answer as string;
+const PreloadItemDropdown: React.FC<IProps> = ({ data, preloadData, index, onChangeAnswerStr }) => {
+  const answer = preloadData.answer as string;
   return (
     <Wrapper>
       <InputLabel id="select-label">타입</InputLabel>
