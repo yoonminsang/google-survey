@@ -10,13 +10,12 @@ export interface IPreloadSimple extends IPreloadCommon {
 export interface IPreloadMultiple extends IPreloadCommon {
   type: 'multiple';
   answer: string;
-  isEtc: boolean;
   etcAnswer: string;
 }
 export interface IPreloadCheckbox extends IPreloadCommon {
   type: 'checkbox';
+  checkArr: boolean[];
   answer: string[];
-  isEtc: boolean;
   etcAnswer: string;
 }
 export interface IPreloadDropdown extends IPreloadCommon {
