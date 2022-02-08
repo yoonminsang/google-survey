@@ -21,6 +21,7 @@ const Title = styled.div`
 
 const Neccessary = styled.span`
   color: #d93025;
+  font-weight: bold;
 `;
 
 const getItem = (
