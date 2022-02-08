@@ -1,7 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
-import { init } from '@/store/preload';
+import { changeAnswerStr, init } from '@/store/preload';
+import { SelectChangeEvent } from '@mui/material';
 
 export const usePreload = () => {
   const dispatch = useDispatch();
@@ -23,9 +24,21 @@ export const usePreload = () => {
     });
     dispatch({ type: init.type, payload: nextPreload });
   };
+  const onChangeAnswerStr = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | SelectChangeEvent<string>,
+    index: number,
+  ) => {
+    const answer = e.target.value;
+    dispatch({ type: changeAnswerStr.type, payload: { index, answer } });
+  };
+  const onChangeAnswerStrByClick = (e: SelectChangeEvent) => {
+    console.log(e.target.value);
+  };
 
   return {
     preload,
     onInit,
+    onChangeAnswerStr,
+    onChangeAnswerStrByClick,
   };
 };
