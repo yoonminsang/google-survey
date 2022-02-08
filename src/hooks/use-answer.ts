@@ -2,37 +2,41 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/store';
 import { init } from '@/store/preload';
+import { IPreloadCheckbox, IPreloadMultiple } from '@/types/preload';
+import { addAnswer } from '@/store/answer';
+import { IAnswer } from '@/types/answer';
+import { usePreloadInit } from './use-preload-init';
 
 export const useAnswer = () => {
+  const { onInit } = usePreloadInit();
   const dispatch = useDispatch();
-  const { surveys } = useSelector((state: RootState) => state.survey);
-  const { preload } = useSelector((state: RootState) => state.preload);
+  const preload = useSelector((state: RootState) => state.preload.preload);
 
-  const onInit = () => {
-    const nextPreload = surveys.map(({ id, data, type, title, isNeccessary, etc }) => {
-      switch (type) {
+  const onAddAnswer = () => {
+    const arr: IAnswer[] = [];
+    for (let i = 0; i < preload.length; i++) {
+      switch (preload[i].type) {
         case 'short':
         case 'long':
         case 'dropdown':
-          return { id, type, title, answer: '', isNeccessary };
+          if (preload[i].isNeccessary && preload[i].answer === '') {
+            alert('필수항목을 입력해주세요');
+            return;
+          }
         case 'multiple':
-          return { id, type, title, answer: '', isNeccessary, etcAnswer: '' };
         case 'checkbox':
-          return {
-            id,
-            type,
-            title,
-            checkArr: Array(data.length + 1).fill(false),
-            answer: [],
-            isNeccessary,
-            etcAnswer: '',
-          };
+          if (preload[i].answer === '기타' && (preload[i] as IPreloadMultiple | IPreloadCheckbox).etcAnswer === '') {
+            alert('기타항목을 입력해주세요');
+            return;
+          }
       }
-    });
-    dispatch({ type: init.type, payload: nextPreload });
+      const { id, answer, etcAnswer } = preload[i] as IPreloadCheckbox;
+      arr.push({ id, answer, etcAnswer });
+    }
+    dispatch({ type: addAnswer.type, payload: arr });
+    onInit();
   };
-
   return {
-    onInit,
+    onAddAnswer,
   };
 };
