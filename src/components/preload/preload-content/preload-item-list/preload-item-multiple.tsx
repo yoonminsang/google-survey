@@ -5,36 +5,49 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import { Input } from '@mui/material';
 import styled from 'styled-components';
+import { IPreloadMultiple, TPreload } from '@/types/preload';
 
 interface IProps {
   id: number;
   data: string[];
   etc: boolean;
+  preload: TPreload[];
+  index: number;
+  onChangeAnswerStr: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => void;
+  onChangeEtcAnswer: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => void;
 }
 
 const EtcWrapper = styled.div`
   display: flex;
 `;
 
-const PreloadItemMultiple: React.FC<IProps> = ({ id, data, etc }) => {
-  const [value, setValue] = React.useState('female');
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
-  };
+const PreloadItemMultiple: React.FC<IProps> = ({
+  id,
+  data,
+  etc,
+  preload,
+  index,
+  onChangeAnswerStr,
+  onChangeEtcAnswer,
+}) => {
+  const { answer, etcAnswer } = preload[index] as IPreloadMultiple;
   return (
     <FormControl>
-      <RadioGroup value={value} name="radio-buttons-group" onChange={handleChange}>
-        <FormControlLabel value="female" control={<Radio />} label="Female" />
-        <FormControlLabel value="male" control={<Radio />} label="Male" />
-        <FormControlLabel value="other" control={<Radio />} label="Other" />
+      <RadioGroup value={answer} name="radio-buttons-group" onChange={(e) => onChangeAnswerStr(e, index)}>
+        {data.map((str, dataIndex) => (
+          <FormControlLabel key={dataIndex} value={str} control={<Radio />} label={str} />
+        ))}
         {etc && (
-          <EtcWrapper>
-            <FormControlLabel value="etc" control={<Radio />} label="기타" />
-            <FormControl>
-              <Input sx={{ width: '498px', margin: '0px !important' }} />
-            </FormControl>
-          </EtcWrapper>
+          <FormControl>
+            <EtcWrapper>
+              <FormControlLabel value="etc" control={<Radio />} label="기타" />
+              <Input
+                sx={{ width: '498px', margin: '0px !important' }}
+                value={etcAnswer}
+                onChange={(e) => onChangeEtcAnswer(e, index)}
+              />
+            </EtcWrapper>
+          </FormControl>
         )}
       </RadioGroup>
     </FormControl>
