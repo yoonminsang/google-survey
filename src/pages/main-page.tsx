@@ -6,7 +6,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import SurveyForm from '@/components/survey-form';
 import styled from 'styled-components';
 import Preload from '@/components/preload';
-import { usePreload } from '@/hooks/use-preload';
+import { useAnswer } from '@/hooks/use-answer';
 
 const QUESTION = 'question';
 const PRELOAD = 'preload';
@@ -33,7 +33,7 @@ const TabPanelWrapper = styled.div`
 `;
 
 const MainPage: React.FC = () => {
-  const { onInit } = usePreload();
+  const { onInit } = useAnswer();
   const [hash, setHash] = useState(QUESTION);
   const handleChange = useCallback((e: React.SyntheticEvent, newHash: string) => {
     if (newHash === PRELOAD) onInit();
