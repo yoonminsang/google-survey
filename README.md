@@ -2,11 +2,11 @@
 
 구글 설문조사 만들기
 
-![image](https://user-images.githubusercontent.com/57904979/152960577-da31aa37-1cb8-42a0-987d-a3dcf8b841fe.png)
-![image](https://user-images.githubusercontent.com/57904979/152960761-d8223a79-935e-4eef-8bca-11424077159d.png)
-![image](https://user-images.githubusercontent.com/57904979/152960909-6e9161ac-028a-4443-b514-9021c239d2a5.png)
-![image](https://user-images.githubusercontent.com/57904979/152960992-d7315925-07ed-42c6-849b-e10b10541447.png)
-![image](https://user-images.githubusercontent.com/57904979/152961054-ecc1640b-ebaa-4e0d-95b2-336e060f0575.png)
+### 실행방법
+
+- yarn install
+- yarn start
+- http://localhost:3000/ dev서버 접속
 
 ### 후기
 
@@ -23,3 +23,9 @@
 - 드래그앤 드랍(설문지, 옵션)
 - 사가적용(일부)
 - 테스트
+
+![image](https://user-images.githubusercontent.com/57904979/152960577-da31aa37-1cb8-42a0-987d-a3dcf8b841fe.png)
+![image](https://user-images.githubusercontent.com/57904979/152960761-d8223a79-935e-4eef-8bca-11424077159d.png)
+![image](https://user-images.githubusercontent.com/57904979/152960909-6e9161ac-028a-4443-b514-9021c239d2a5.png)
+![image](https://user-images.githubusercontent.com/57904979/152960992-d7315925-07ed-42c6-849b-e10b10541447.png)
+![image](https://user-images.githubusercontent.com/57904979/152961054-ecc1640b-ebaa-4e0d-95b2-336e060f0575.png)
