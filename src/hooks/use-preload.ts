@@ -31,7 +31,7 @@ export const usePreload = () => {
     surveys[index].data.forEach((str, i) => {
       if (nextCheckArr[i]) nextAnswer.push(str);
     });
-    if (nextAnswer[nextAnswer.length - 1]) nextAnswer.push('기타');
+    if (nextCheckArr[nextCheckArr.length - 1]) nextAnswer.push('etc');
     dispatch({ type: changeCheckbox.type, payload: { index, nextCheckArr, nextAnswer } });
   };
 

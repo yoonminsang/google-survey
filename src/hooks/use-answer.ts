@@ -7,6 +7,7 @@ import { addAnswer } from '@/store/answer';
 import { IAnswer } from '@/types/answer';
 import { usePreloadInit } from './use-preload-init';
 
+// TODO: 리팩토링
 export const useAnswer = () => {
   const { onInit } = usePreloadInit();
   const dispatch = useDispatch();
@@ -25,13 +26,21 @@ export const useAnswer = () => {
           }
         case 'multiple':
         case 'checkbox':
-          if (preload[i].answer === '기타' && (preload[i] as IPreloadMultiple | IPreloadCheckbox).etcAnswer === '') {
+          if (
+            preload[i].answer.includes('기타') &&
+            (preload[i] as IPreloadMultiple | IPreloadCheckbox).etcAnswer === ''
+          ) {
             alert('기타항목을 입력해주세요');
             return;
           }
       }
-      const { id, answer, etcAnswer } = preload[i] as IPreloadCheckbox;
-      arr.push({ id, answer, etcAnswer });
+      if (preload[i].answer.includes('기타')) {
+        const { id, answer, etcAnswer } = preload[i] as IPreloadCheckbox;
+        arr.push({ id, answer, etcAnswer });
+      } else {
+        const { id, answer } = preload[i] as IPreloadCheckbox;
+        arr.push({ id, answer });
+      }
     }
     dispatch({ type: addAnswer.type, payload: arr });
     onInit();
