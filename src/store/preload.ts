@@ -12,10 +12,14 @@ const slice = createSlice({
     init: (state, action: PayloadAction<TPreload[]>) => {
       state.preload = action.payload;
     },
+    changeAnswerStr: (state, action: PayloadAction<{ index: number; answer: string }>) => {
+      const { index, answer } = action.payload;
+      state.preload[index].answer = answer;
+    },
   },
 });
 
 const { actions, reducer: preloadReducer } = slice;
-const { init } = actions;
+const { init, changeAnswerStr } = actions;
 
-export { preloadReducer, init };
+export { preloadReducer, init, changeAnswerStr };
