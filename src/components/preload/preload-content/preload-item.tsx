@@ -1,6 +1,6 @@
 import SurveyFormItmeWrapper from '@/components/survey-form/styled/sruvey-form-item-wrapper';
 import { usePreload } from '@/hooks/use-preload';
-import { IPreloadDropdown, IPreloadMultiple, IPreloadSimple, TPreload } from '@/types/preload';
+import { IPreloadCheckbox, IPreloadDropdown, IPreloadMultiple, IPreloadSimple, TPreload } from '@/types/preload';
 import { TSurvey, TSurveyType } from '@/types/survey';
 import { SelectChangeEvent } from '@mui/material';
 import React from 'react';
@@ -35,6 +35,7 @@ const getItem = (
     index: number,
   ) => void,
   onChangeEtcAnswer: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => void,
+  onChangeCheckBox: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void,
 ) => {
   switch (type) {
     case 'short':
@@ -60,7 +61,18 @@ const getItem = (
         />
       );
     case 'checkbox':
-      return <PreloadItemCheckbox id={id} data={data} etc={etc} />;
+      return (
+        <PreloadItemCheckbox
+          id={id}
+          data={data}
+          etc={etc}
+          preloadData={preload[index] as IPreloadCheckbox}
+          index={index}
+          onChangeAnswerStr={onChangeAnswerStr}
+          onChangeEtcAnswer={onChangeEtcAnswer}
+          onChangeCheckBox={onChangeCheckBox}
+        />
+      );
     case 'dropdown':
       return (
         <PreloadItemDropdown
@@ -75,13 +87,13 @@ const getItem = (
 
 const PreloadItem: React.FC<IProps> = ({ survey, index }) => {
   const { id, type, title, data, isNeccessary, etc } = survey;
-  const { preload, onChangeAnswerStr, onChangeEtcAnswer } = usePreload();
+  const { preload, onChangeAnswerStr, onChangeEtcAnswer, onChangeCheckBox } = usePreload();
   return (
     <SurveyFormItmeWrapper isMargin isPadding>
       <Title>
         {title} {isNeccessary && <Neccessary>*</Neccessary>}
       </Title>
-      {getItem(id, type, data, etc, preload, index, onChangeAnswerStr, onChangeEtcAnswer)}
+      {getItem(id, type, data, etc, preload, index, onChangeAnswerStr, onChangeEtcAnswer, onChangeCheckBox)}
     </SurveyFormItmeWrapper>
   );
 };

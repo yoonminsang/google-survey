@@ -20,10 +20,18 @@ const slice = createSlice({
       const { index, etcAnswer } = action.payload;
       (state.preload[index] as IPreloadMultiple | IPreloadCheckbox).etcAnswer = etcAnswer;
     },
+    changeCheckbox: (
+      state,
+      action: PayloadAction<{ index: number; nextCheckArr: boolean[]; nextAnswer: string[] }>,
+    ) => {
+      const { index, nextCheckArr, nextAnswer } = action.payload;
+      (state.preload[index] as IPreloadCheckbox).checkArr = nextCheckArr;
+      state.preload[index].answer = nextAnswer;
+    },
   },
 });
 
 const { actions, reducer: preloadReducer } = slice;
-const { init, changeAnswerStr, changeEtcAnswer } = actions;
+const { init, changeAnswerStr, changeEtcAnswer, changeCheckbox } = actions;
 
-export { preloadReducer, init, changeAnswerStr, changeEtcAnswer };
+export { preloadReducer, init, changeAnswerStr, changeEtcAnswer, changeCheckbox };

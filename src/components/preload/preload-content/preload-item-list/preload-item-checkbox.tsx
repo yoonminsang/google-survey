@@ -3,11 +3,17 @@ import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { FormControl, Input } from '@mui/material';
 import styled from 'styled-components';
+import { IPreloadCheckbox } from '@/types/preload';
 
 interface IProps {
   id: number;
   data: string[];
   etc: boolean;
+  preloadData: IPreloadCheckbox;
+  index: number;
+  onChangeAnswerStr: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => void;
+  onChangeEtcAnswer: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => void;
+  onChangeCheckBox: (e: React.ChangeEvent<HTMLInputElement>, index: number) => void;
 }
 
 const Wrapper = styled.div`
@@ -19,30 +25,47 @@ const EtcWrapper = styled.div`
   display: flex;
 `;
 
-const PreloadItemCheckbox: React.FC<IProps> = ({ id, data, etc }) => {
-  const [checked, setChecked] = React.useState([false, false, false]);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const index = +event.target.value;
-    setChecked(() => {
-      const nextChecked = checked.slice();
-      nextChecked[index] = event.target.checked;
-      return nextChecked;
-    });
-  };
-
+const PreloadItemCheckbox: React.FC<IProps> = ({
+  id,
+  data,
+  etc,
+  preloadData,
+  index,
+  onChangeEtcAnswer,
+  onChangeCheckBox,
+}) => {
+  const { checkArr, etcAnswer } = preloadData;
   return (
     <Wrapper>
-      <FormControlLabel label="Child 1" control={<Checkbox checked={checked[0]} value="0" onChange={handleChange} />} />
-      <FormControlLabel label="Child 2" control={<Checkbox checked={checked[1]} value="1" onChange={handleChange} />} />
+      {data.map((str, dataIndex) => (
+        <FormControlLabel
+          key={dataIndex}
+          label={data[dataIndex]}
+          control={
+            <Checkbox checked={checkArr[dataIndex]} value={dataIndex} onChange={(e) => onChangeCheckBox(e, index)} />
+          }
+        />
+      ))}
       {etc && (
         <FormControl>
           <EtcWrapper>
             <FormControlLabel
               label="기타"
-              control={<Checkbox checked={checked[2]} value="2" onChange={handleChange} />}
+              control={
+                <Checkbox
+                  checked={checkArr[checkArr.length - 1]}
+                  value={checkArr.length - 1}
+                  onChange={(e) => onChangeCheckBox(e, index)}
+                />
+              }
             />
-            {<Input sx={{ width: '498px', margin: '0px !important' }} />}
+            {
+              <Input
+                sx={{ width: '498px', margin: '0px !important' }}
+                value={etcAnswer}
+                onChange={(e) => onChangeEtcAnswer(e, index)}
+              />
+            }
           </EtcWrapper>
         </FormControl>
       )}

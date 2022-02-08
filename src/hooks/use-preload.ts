@@ -1,8 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import produce from 'immer';
 import { RootState } from '@/store';
-import { changeAnswerStr, changeEtcAnswer, init } from '@/store/preload';
+import { changeAnswerStr, changeCheckbox, changeEtcAnswer, init } from '@/store/preload';
 import { SelectChangeEvent } from '@mui/material';
+import { IPreloadCheckbox } from '@/types/preload';
 
 export const usePreload = () => {
   const dispatch = useDispatch();
@@ -23,7 +25,7 @@ export const usePreload = () => {
             id,
             type,
             title,
-            checkArr: Array(data.length).fill(false),
+            checkArr: Array(data.length + 1).fill(false),
             answer: [],
             isNeccessary,
             etcAnswer: '',
@@ -41,8 +43,20 @@ export const usePreload = () => {
   };
   const onChangeEtcAnswer = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, index: number) => {
     const etcAnswer = e.target.value;
-    console.log('onchagne answer etc', etcAnswer, index);
     dispatch({ type: changeEtcAnswer.type, payload: { index, etcAnswer } });
+  };
+  const onChangeCheckBox = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const checkArrIndex = +e.target.value;
+    const nextCheckArr = produce((preload[index] as IPreloadCheckbox).checkArr, (draft) => {
+      draft[checkArrIndex] = !draft[checkArrIndex];
+    });
+    const nextAnswer: string[] = [];
+    surveys[index].data.forEach((str, i) => {
+      if (nextCheckArr[i]) nextAnswer.push(str);
+    });
+    if (nextAnswer[nextAnswer.length - 1]) nextAnswer.push('기타');
+    console.log('change checkbox', nextCheckArr, nextAnswer);
+    dispatch({ type: changeCheckbox.type, payload: { index, nextCheckArr, nextAnswer } });
   };
 
   return {
@@ -50,5 +64,6 @@ export const usePreload = () => {
     onInit,
     onChangeAnswerStr,
     onChangeEtcAnswer,
+    onChangeCheckBox,
   };
 };
