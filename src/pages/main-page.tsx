@@ -7,6 +7,7 @@ import SurveyForm from '@/components/survey-form';
 import styled from 'styled-components';
 import Preload from '@/components/preload';
 import { usePreloadInit } from '@/hooks/use-preload-init';
+import Answer from '@/components/answer';
 
 const QUESTION = 'question';
 const PRELOAD = 'preload';
@@ -59,7 +60,7 @@ const MainPage: React.FC = () => {
             {hash === PRELOAD && <Preload />}
           </TabPanel>
           <TabPanel value={ANSWER} sx={{ padding: '0px' }}>
-            {hash === ANSWER && <div>응답 페이지</div>}
+            {hash === ANSWER && <Answer />}
           </TabPanel>
         </TabPanelWrapper>
       </TabContext>
